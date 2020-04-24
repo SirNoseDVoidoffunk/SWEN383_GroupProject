@@ -63,12 +63,30 @@ public class Store {
         this.cust_list = cust_list;
     }
 
-    /*
------------------------------------------------------------------------------------------------------------------------
-                        additional methods below
-
-                        //searchForItems()
-                        //getCustomerList()
-                        //getInventoryList()
+//-----------------------------------------------------------------------------------------------------------------------
+    
+   /**
+    * Returns all Items in Inventory whose names contain a search parameter
+    *
+    * @param name: The parameter being searched for
+    * @return: An ArrayList of matching results
     */
+    public ArrayList<Item> searchForItems(String name) {
+        ArrayList<Item> matches = new ArrayList<Item>();
+        for (Item item : this.inventory.getItems()) {
+            if(item.getName().toLowerCase().contains(name.toLowerCase)) {
+                matches.add(item);
+            }
+        }
+        return matches;
+    }
+    
+   /**
+    * Retrieves the ArrayList of Items from Inventory
+    *
+    * @return: The contents of the Inventory's Items attribute
+    */
+    public ArrayList<Item> getInventoryList() {
+        return this.inventory.getItems();
+    }
 }
