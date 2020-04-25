@@ -75,10 +75,14 @@ public class Transaction {
         this.line_items = line_items;
     }
 
-    /*
----------------------------------------------------------------------------------------------------------------
-                            additional methods below
-
-                            //logTransaction()
+//---------------------------------------------------------------------------------------------------------------
+    
+   /**
+    * Logs a transaction in a given Store's history
+    *
+    * @param store: The store to which the Transaction is attributed
     */
+    public void logTransaction(Store store) {
+        store.getHistory().add(this);
+    }
 }
