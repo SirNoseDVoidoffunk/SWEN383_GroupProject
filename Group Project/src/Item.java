@@ -248,13 +248,14 @@ public class Item {
         
     
     public String checkStatus() {
-        if(this.available) {
+        if (this.available) {
             return "Available";
-        } else if(this.onReserve) {
+        } else if (this.onReserve) {
             return "reserved";
-        } else if(!(this.inStock)) {
+        } else if (!(this.inStock)) {
             return "Not in Stock";
         } else {
             return "";
         }
+    }
 }

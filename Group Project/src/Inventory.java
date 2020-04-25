@@ -60,10 +60,11 @@ public class Inventory {
      */
     public boolean removeItem(Item item) {
 
-        if(this.items.indexOf(item) == -1) {
+        if (this.items.indexOf(item) == -1) {
             return false;
         } else {
             this.items.remove(item);
             return true;
         }
+    }
 }
