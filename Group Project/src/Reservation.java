@@ -1,41 +1,46 @@
-/*
-    SWEN 383 - Final Group Project
-    Team Name: Machine Code Migos
-    Team Members: Blake Wesel, Bryce Jones, Regina Bass, Hansel Leal, Samuel Crouch
-    Date Due: April 17
-*/
+/**
+ * Reservation class that's used to keep track of the reservation process as a transaction and log itself to the interface computer
+ * @version 4/25/20
+ * @author Blake Wesel
+ *         Hansel Leal
+ *         Bryce Jones
+ *         Regina Bass
+ *         Samual Crouch
+ */
 
 
 import java.util.Date;
 
-public class Reservation {
+public class Reservation extends Transaction {
     //class attributes
-    private String reservation_number;
-    private String customer_account;
+    private int reservation_number;
+    private Customer customer_account;
     private Date reservation_date;
     private String reservation_title;
-    private String item_number;
+    private int item_number;
     private String reservation_status;
 
     //constructors
 
 
     public Reservation() {
-        reservation_number = "";
-        customer_account = "";
+        super();
+        reservation_number = 0;
+        customer_account = null;
         reservation_date = new Date();
         reservation_title = "";
-        item_number = "";
+        item_number = -1;
         reservation_status = "";
 
     }
 
-    public Reservation(String reservation_number, String customer_account,
-                       Date reservation_date, String reservation_title, String item_number,
+    public Reservation(int reservation_number, Customer customer_account,
+                       String reservation_title, int item_number,
                        String reservation_status) {
+        super();
         this.reservation_number = reservation_number;
         this.customer_account = customer_account;
-        this.reservation_date = reservation_date;
+        this.reservation_date = new Date();
         this.reservation_title = reservation_title;
         this.item_number = item_number;
         this.reservation_status = reservation_status;
@@ -43,19 +48,19 @@ public class Reservation {
 
     //accesors and mutators
 
-    public String getReservation_number() {
+    public int getReservation_number() {
         return reservation_number;
     }
 
-    public void setReservation_number(String reservation_number) {
+    public void setReservation_number(int reservation_number) {
         this.reservation_number = reservation_number;
     }
 
-    public String getCustomer_account() {
+    public Customer getCustomer_account() {
         return customer_account;
     }
 
-    public void setCustomer_account(String customer_account) {
+    public void setCustomer_account(Customer customer_account) {
         this.customer_account = customer_account;
     }
 
@@ -75,11 +80,11 @@ public class Reservation {
         this.reservation_title = reservation_title;
     }
 
-    public String getItem_number() {
+    public int getItem_number() {
         return item_number;
     }
 
-    public void setItem_number(String item_number) {
+    public void setItem_number(int item_number) {
         this.item_number = item_number;
     }
 

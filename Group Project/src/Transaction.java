@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 
-/*
-    SWEN 383 - Final Group Project
-    Team Name: Machine Code Migos
-    Team Members: Blake Wesel, Bryce Jones, Regina Bass, Hansel Leal, Samuel Crouch
-    Date Due: April 17
-*/
+/**
+ * Transaction class that's used to issue the correct type of transaction process and call that process to log itself
+ * to the interface computer
+ * @version 4/25/20
+ * @author Blake Wesel
+ *         Hansel Leal
+ *         Bryce Jones
+ *         Regina Bass
+ *         Samual Crouch
+ */
 public class Transaction {
     //class attributes
     private int transactionID;
@@ -81,4 +85,14 @@ public class Transaction {
 
                             //logTransaction()
     */
+
+    /**
+     * Logs the transaction to the regional control computer
+     * @return status - True if the transaction was able to be logged into the regional control computers
+     */
+    public boolean logTransaction() {
+        // this is where we would connect to the regional control computer and log the transaction
+        // For the POC, we are only return true in assumption this action gets carried out when in full development
+        return true;
+    }
 }

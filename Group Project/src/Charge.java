@@ -1,9 +1,12 @@
-/*
-    SWEN 383 - Final Group Project
-    Team Name: Machine Code Migos
-    Team Members: Blake Wesel, Bryce Jones, Regina Bass, Hansel Leal, Samuel Crouch
-    Date Due: April 17
-*/
+/**
+ * Charge class that's used to keep track of charges and fees that can applied to customers
+ * @version 4/25/20
+ * @author Blake Wesel
+ *         Hansel Leal
+ *         Bryce Jones
+ *         Regina Bass
+ *         Samual Crouch
+ */
 
 import java.util.Date;
 

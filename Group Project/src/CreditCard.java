@@ -1,9 +1,12 @@
-/*
-    SWEN 383 - Final Group Project
-    Team Name: Machine Code Migos
-    Team Members: Blake Wesel, Bryce Jones, Regina Bass, Hansel Leal, Samuel Crouch
-    Date Due: April 17
-*/
+/**
+ * CreditCard class that's used to validate credit card processes
+ * @version 4/25/20
+ * @author Blake Wesel
+ *         Hansel Leal
+ *         Bryce Jones
+ *         Regina Bass
+ *         Samual Crouch
+ */
 
 public class CreditCard {
     //class attributes

@@ -1,9 +1,12 @@
-/*
-    SWEN 383 - Final Group Project
-    Team Name: Machine Code Migos
-    Team Members: Blake Wesel, Bryce Jones, Regina Bass, Hansel Leal, Samuel Crouch
-    Date Due: April 17
-*/
+/**
+ * Item class that's used as the parent class of DVD and CD and to declare shared methods for both of those classes
+ * @version 4/25/20
+ * @author Blake Wesel
+ *         Hansel Leal
+ *         Bryce Jones
+ *         Regina Bass
+ *         Samual Crouch
+ */
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +24,7 @@ public class Item {
     private Date returnDate;
     private String name;
     private String type;
+    private int item_id;
 
     //constructors
     public Item() {
@@ -28,13 +32,14 @@ public class Item {
         onReserve = false;
         inStock = false;
         inventoryAmount = 0;
-        customerReserving = new Customer();
-        customerRenting = new Customer();
+        customerReserving = null;
+        customerRenting = null;
         reservationList = new ArrayList<Customer>();
-        retailPeriod = new Date();
-        returnDate = new Date();
+        retailPeriod = null;
+        returnDate = null;
         name = "";
         type = "";
+        item_id = -1;
     }
 
     public Item(boolean available, boolean onReserve, boolean inStock,
@@ -144,14 +149,65 @@ public class Item {
         this.type = type;
     }
 
+    public int getItemId() {
+        return item_id;
+    }
+
+    public void setItemId(int item_id) {
+        this.item_id = item_id;
+    }
+
+
+
+    /**
+     * Updates the necessary values in order to place an item on reserve
+     * @param cust - Customer that is reserving the item
+     * @return status - True if the reserve could happen successfully, false if not
+     */
+    public boolean placeOnReserve(Customer cust) {
+
+        // if the item is available then reserve it
+        if(available && !onReserve) {
+            this.onReserve = true;
+            this.customerReserving = cust;
+            this.reservationList.add(cust);
+
+            available = false;
+            return true;
+        // if the item is not available (not in stock) or it's reserved then add to reservation list
+        } else if(!available || onReserve) {
+            this.reservationList.add(cust);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Cancel's the reservation for a specific customer
+     * @param cust - The customer that wants to cancel their reservation
+     */
+    public void cancelReservation(Customer cust) {
+        if(!this.reservationList.isEmpty()) {
+            // if the customer is at the top of the list
+            if(reservationList.indexOf(cust) == 0) {
+                reservationList.remove(cust);
+                if(reservationList.size() == 0) {
+                    available = true;
+                    onReserve = false;
+                }
+            // if the customer is only on the reservation list
+            } else {
+                reservationList.remove(cust);
+            }
+        }
+    }
+
     /*
 -------------------------------------------------------------------------------------------------------------------
                 additional methods below
 
-                //placeOnReserve()
                 //placeOnHold()
                 //returnToStock()
-                //cancelReservation()
                 //checkOutItem()
                 //checkStatus()
                 //setRetailRate()

@@ -1,9 +1,12 @@
-/*
-    SWEN 383 - Final Group Project
-    Team Name: Machine Code Migos
-    Team Members: Blake Wesel, Bryce Jones, Regina Bass, Hansel Leal, Samuel Crouch
-    Date Due: April 17
-*/
+/**
+ * Store class that's used to keep track of the inventory, customer, employee, and payment classes
+ * @version 4/25/20
+ * @author Blake Wesel
+ *         Hansel Leal
+ *         Bryce Jones
+ *         Regina Bass
+ *         Samual Crouch
+ */
 
 import java.util.ArrayList;
 
@@ -66,9 +69,41 @@ public class Store {
     /*
 -----------------------------------------------------------------------------------------------------------------------
                         additional methods below
-
-                        //searchForItems()
-                        //getCustomerList()
                         //getInventoryList()
     */
+
+    /**
+     * Given a search inquiry, filters and finds the list of titles start with that sequence of letters and returns it
+     * @param search - Search string
+     * @return items - The list of item that contains the search string
+     */
+    public ArrayList<Item> searchForItems(String search) {
+        char[] char_list = search.toCharArray();
+        ArrayList<Item> items = inventory.getItems();
+
+        for(int i = 0; i < char_list.length; i++) {
+            for (Item item : items) {
+                if (char_list[i] != item.getName().toCharArray()[i]) {
+                    items.remove(item);
+                }
+            }
+        }
+        return items;
+    }
+
+    /**
+     * Returns the customer list of the store
+     * @return customer list - the list of customers
+     */
+    public ArrayList<Customer> getCustomerList() {
+        return this.cust_list;
+    }
+
+    /**
+     * Returns the customer list of the store
+     * @return customer list - the list of customers
+     */
+    public ArrayList<Item> getInventoryList() {
+        return this.inventory.getItems();
+    }
 }
