@@ -65,7 +65,6 @@ public class Store {
     public void setCust_list(ArrayList<Customer> cust_list) {
         this.cust_list = cust_list;
     }
-
     /*
 -----------------------------------------------------------------------------------------------------------------------
                         additional methods below
@@ -78,17 +77,13 @@ public class Store {
      * @return items - The list of item that contains the search string
      */
     public ArrayList<Item> searchForItems(String search) {
-        char[] char_list = search.toCharArray();
-        ArrayList<Item> items = inventory.getItems();
-
-        for(int i = 0; i < char_list.length; i++) {
-            for (Item item : items) {
-                if (char_list[i] != item.getName().toCharArray()[i]) {
-                    items.remove(item);
-                }
+        ArrayList<Item> matches = new ArrayList<Item>();
+        for (Item item : this.inventory.getItems()) {
+            if(item.getName().toLowerCase().contains(search.toLowerCase())) {
+                matches.add(item);
             }
         }
-        return items;
+        return matches;
     }
 
     /**
@@ -98,11 +93,12 @@ public class Store {
     public ArrayList<Customer> getCustomerList() {
         return this.cust_list;
     }
-
-    /**
-     * Returns the customer list of the store
-     * @return customer list - the list of customers
-     */
+    
+   /**
+    * Retrieves the ArrayList of Items from Inventory
+    *
+    * @return: The contents of the Inventory's Items attribute
+    */
     public ArrayList<Item> getInventoryList() {
         return this.inventory.getItems();
     }

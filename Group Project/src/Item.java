@@ -212,5 +212,49 @@ public class Item {
                 //checkStatus()
                 //setRetailRate()
                 //setRetailPeriod()
+
     */
+    
+    /*  Added to improve ArrayList functionality for the Inventory class. Since each item has an inventory amount, it is assumed that
+        there should not be multiple objects with the same name and type (with the second attribute only being included in case there
+        is a DVD and CD with the same name). Let me know if you think otherwise. ~Sam */
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Item){
+            Item i = (Item) o;
+            return (this.name.equals(i.getName()) && this.type.equals(i.getType()));
+        } else {
+            return false;
+        }
+    }
+   
+   /**
+    * Increments inventoryAmount, then sets inStock to true (since there is at least one item in the inventory)
+    */
+    public void returnToStock() {
+        this.inventoryAmount++;
+        this.inStock = true;
+    }
+    
+   /**
+    * Checks out an item. Assumes that this method can't be called if an item isn't in stock or is already rented.
+    *
+    * @param cust: the customer checking out this item
+    */
+    public void checkOutItem(Customer cust) {
+        this.inventoryAmount--;
+        this.customerRenting = cust;
+    }
+        
+    
+    public String checkStatus() {
+        if(this.available) {
+            return "Available";
+        } else if(this.onReserve) {
+            return "reserved";
+        } else if(!(this.inStock)) {
+            return "Not in Stock";
+        } else {
+            return "";
+        }
 }

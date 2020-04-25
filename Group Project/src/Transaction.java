@@ -79,13 +79,6 @@ public class Transaction {
         this.line_items = line_items;
     }
 
-    /*
----------------------------------------------------------------------------------------------------------------
-                            additional methods below
-
-                            //logTransaction()
-    */
-
     /**
      * Logs the transaction to the regional control computer
      * @return status - True if the transaction was able to be logged into the regional control computers

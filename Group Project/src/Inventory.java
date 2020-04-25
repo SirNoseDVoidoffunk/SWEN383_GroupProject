@@ -38,7 +38,6 @@ public class Inventory {
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
-
     /**
      * Checks to see if the inventory is empty or not
      * @return status - True if the inventory is empty, false if not
@@ -67,5 +66,4 @@ public class Inventory {
             this.items.remove(item);
             return true;
         }
-    }
 }
