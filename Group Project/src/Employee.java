@@ -10,8 +10,15 @@ import java.util.ArrayList;
  *         Samual Crouch
  */
 
-public class Employee {
-    //No class attributes - only methods
+public class Employee extends Person {
+
+    public Employee() {
+        super();
+    }
+
+    public Employee(int id, String name, String home_address, String mobile_phone, String home_phone, String email_address, String password) {
+        super(id, name, home_address, mobile_phone, home_phone, email_address, password);
+    }
 
    /**
     * Gets info about an item from a given store
@@ -31,9 +38,10 @@ public class Employee {
    /**
     * Creates a customer from a set of parameters
     */
-    public Customer createCustomer(String name, String addr, int phone, String email, CreditCard ccInfo) {
+    public Customer createCustomer(int id, String name, String home_address, String mobile_phone, String home_phone, String email_address,
+                                   String creditCardInfo, String password) {
         //TODO
-        return null;
+        return new Customer(id, name, home_address, mobile_phone, home_phone, email_address, creditCardInfo, password);
     }
     
    /**

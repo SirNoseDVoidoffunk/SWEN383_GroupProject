@@ -42,21 +42,22 @@ public class Item {
         item_id = -1;
     }
 
-    public Item(boolean available, boolean onReserve, boolean inStock,
-                int inventoryAmount, Customer customerReserving, Customer customerRenting,
-                ArrayList<Customer> reservationList, Date retailPeriod, Date returnDate,
-                String name, String type) {
+    public Item(boolean available, boolean onReserve, boolean inStock, int inventoryAmount, String name, String type) {
+
         this.available = available;
         this.onReserve = onReserve;
         this.inStock = inStock;
         this.inventoryAmount = inventoryAmount;
-        this.customerReserving = customerReserving;
-        this.customerRenting = customerRenting;
-        this.reservationList = reservationList;
-        this.retailPeriod = retailPeriod;
-        this.returnDate = returnDate;
         this.name = name;
         this.type = type;
+
+        // attribute set during rental period
+        this.customerReserving = null;
+        this.customerRenting = null;
+        this.reservationList = new ArrayList<Customer>();
+        this.retailPeriod = null;
+        this.returnDate = null;
+
     }
 
     //accesors and mutators

@@ -8,6 +8,14 @@
  *         Samual Crouch
  */
 
-public class Clerk {
-    //empty class - generic employee - no functional requirements specified
+public class Clerk extends Employee {
+
+    public Clerk() {
+        super();
+    }
+
+    public Clerk(int id, String name, String home_address, String mobile_phone,
+                 String home_phone, String email_address, String creditCardInfo, String password) {
+        super(id, name, home_address, mobile_phone, home_phone, email_address, password);
+    }
 }

@@ -9,7 +9,7 @@
  */
 import java.util.Date;
 
-public class Rental {
+public class Rental extends Transaction {
     //class attributes
     private String rental_number;
     private String customer_account;

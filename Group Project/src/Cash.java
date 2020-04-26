@@ -8,6 +8,30 @@
  *         Samual Crouch
  */
 
-public class Cash {
+public class Cash extends Payment {
+
+    double amountDue;
+
+    public Cash() {
+        super();
+    }
+
+    public Cash(double amountPaid, double amountDue, String currency) {
+        super(amountPaid, currency);
+        this.amountDue = amountDue;
+    }
     //Empty class - No attributes or methods
+
+    /**
+     * Overrides Payment method approve, checks to see if the amount given suffices
+     * @return
+     */
+    @Override
+    public boolean approve() {
+        if(this.getAmount() > this.amountDue) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

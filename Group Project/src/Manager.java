@@ -19,10 +19,19 @@ public class Manager extends Employee {
      * Default Constructor
      */
     public Manager() {
-
+        super();
     }
 
     public Manager(Store store, Inventory inventory) {
+        super();
+        this.store = store;
+        this.inventory = inventory;
+    }
+
+    public Manager(Store store, Inventory inventory, int id, String name, String home_address, String mobile_phone,
+                   String home_phone, String email_address, String creditCardInfo, String password) {
+
+        super(id, name, home_address, mobile_phone, home_phone, email_address, password);
         this.store = store;
         this.inventory = inventory;
     }

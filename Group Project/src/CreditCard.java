@@ -8,7 +8,7 @@
  *         Samual Crouch
  */
 
-public class CreditCard {
+public class CreditCard extends Payment {
     //class attributes
     private String cardNumber;
     private String cvv;
@@ -17,6 +17,7 @@ public class CreditCard {
     //constructors
 
     public CreditCard() {
+        super();
         cardNumber = "";
         cvv = "";
         expiration = "";
@@ -26,6 +27,15 @@ public class CreditCard {
         this.cardNumber = cardNumber;
         this.cvv = cvv;
         this.expiration = expiration;
+    }
+
+    /**
+     * This method would call the interface and make sure the credit card information is correct, however, for the POC,
+     * we are automatically returning true with the impression that in full scale development, this method will be implemented
+     * @return success - True if the transaction was approve, False if not
+     */
+    public boolean approve() {
+        return true;
     }
 
     //accesors and mutators

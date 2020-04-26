@@ -47,6 +47,14 @@ public class Payment {
                         additional methods below
 
                         //createTransaction()
-                        //approve()
     */
+
+    /**
+     * This method is meant to be overwriten - Returns false if used because the child approve methods are
+     * suppose to be used
+     * @return False - Don't use this method, use the child methods of Cash, CreditCard, and DebitCard
+     */
+    public boolean approve() {
+        return false;
+    }
 }

@@ -8,6 +8,14 @@
  *         Samual Crouch
  */
 
-public class DVD {
-        //empty class - no attributes or methods
+public class DVD extends Item {
+
+    public DVD() {
+        super();
+    }
+
+    public DVD(boolean available, boolean onReserve, boolean inStock, int inventoryAmount, String name, String type) {
+        super(available, onReserve, inStock, inventoryAmount, name, type);
+    }
+
 }

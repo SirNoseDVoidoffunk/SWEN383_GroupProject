@@ -10,7 +10,7 @@
 
 import java.util.Date;
 
-public class Return {
+public class Return extends Transaction {
     //class attributes
     private String return_number;
     private String rental_number;

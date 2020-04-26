@@ -25,11 +25,11 @@ public class Store {
         cust_list = new ArrayList<Customer>();
     }
 
-    public Store(Inventory inventory, String location, ArrayList<Transaction> history, ArrayList<Customer> cust_list) {
+    public Store(Inventory inventory, String location) {
         this.inventory = inventory;
         this.location = location;
-        this.history = history;
-        this.cust_list = cust_list;
+        this.history = new ArrayList<>();
+        this.cust_list = new ArrayList<>();
     }
 
     //accesors and mutators
@@ -92,6 +92,12 @@ public class Store {
      */
     public ArrayList<Customer> getCustomerList() {
         return this.cust_list;
+    }
+
+    public void addCustomerToList(Customer cust) {
+        if(cust_list.indexOf(cust) == -1) {
+            cust_list.add(cust);
+        }
     }
     
    /**
