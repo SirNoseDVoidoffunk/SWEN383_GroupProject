@@ -184,7 +184,7 @@ public class FinalProjectMain {
                     System.out.println("3. Set Retail Period");
                     System.out.println("4. Set Retail Rate");
                     System.out.println("5. Something else");
-                    System.out.println("6. Something else");
+                    System.out.println("6. Create Inventory Report");
 
                     System.out.print("\nInput: ");
                     input = scanner.nextLine();
@@ -251,7 +251,13 @@ public class FinalProjectMain {
 
                     } else if (input.equals("6")) {
 
-                        // action code goes here
+                        // Business Requirement 11
+                        String file_Name = manager.createInventoryReport();
+                        if(!file_Name.equals("")) {
+                            System.out.println("\nInventory report ("+file_Name+") created");
+                        } else {
+                            System.out.println("\nThe inventory report could not be created");
+                        }
 
                     }
                 }

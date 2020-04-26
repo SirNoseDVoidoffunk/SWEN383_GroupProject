@@ -182,7 +182,7 @@ public class Item {
 
             available = false;
             return true;
-        // if the item is not available (not in stock) or it's reserved then add to reservation list
+            // if the item is not available (not in stock) or it's reserved then add to reservation list
         } else if(!available || onReserve) {
             this.reservationList.add(cust);
             return true;
@@ -203,7 +203,7 @@ public class Item {
                     available = true;
                     onReserve = false;
                 }
-            // if the customer is only on the reservation list
+                // if the customer is only on the reservation list
             } else {
                 reservationList.remove(cust);
             }
@@ -213,14 +213,12 @@ public class Item {
     /*
 -------------------------------------------------------------------------------------------------------------------
                 additional methods below
-
                 //placeOnHold()
                 //returnToStock()
                 //checkOutItem()
                 //checkStatus()
-
     */
-    
+
     /*  Added to improve ArrayList functionality for the Inventory class. Since each item has an inventory amount, it is assumed that
         there should not be multiple objects with the same name and type (with the second attribute only being included in case there
         is a DVD and CD with the same name). Let me know if you think otherwise. ~Sam */
@@ -233,26 +231,26 @@ public class Item {
             return false;
         }
     }
-   
-   /**
-    * Increments inventoryAmount, then sets inStock to true (since there is at least one item in the inventory)
-    */
+
+    /**
+     * Increments inventoryAmount, then sets inStock to true (since there is at least one item in the inventory)
+     */
     public void returnToStock() {
         this.inventoryAmount++;
         this.inStock = true;
     }
-    
-   /**
-    * Checks out an item. Assumes that this method can't be called if an item isn't in stock or is already rented.
-    *
-    * @param cust: the customer checking out this item
-    */
+
+    /**
+     * Checks out an item. Assumes that this method can't be called if an item isn't in stock or is already rented.
+     *
+     * @param cust: the customer checking out this item
+     */
     public void checkOutItem(Customer cust) {
         this.inventoryAmount--;
         this.customerRenting = cust;
     }
-        
-    
+
+
     public String checkStatus() {
         if (this.available) {
             return "Available";

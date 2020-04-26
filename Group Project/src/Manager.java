@@ -89,6 +89,15 @@ public class Manager extends Employee {
     //removeItem()
     //getCustomerReport()
     //removeLateCharge()
-    //createInventoryReport()
+
+    /**
+     * Creates an inventory report
+     * @return String - The name of the generated CSV file
+     */
+    public String createInventoryReport() {
+        InventoryReport inventoryReport = new InventoryReport();
+        for(Item item : this.store.getInventoryList()) { inventoryReport.addItem(item); }
+        return inventoryReport.getReport();
+    }
 
 }
