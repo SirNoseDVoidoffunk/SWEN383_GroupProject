@@ -110,6 +110,12 @@ public class Customer extends Person {
         this.rentedItems = rentedItems;
     }
 
+    public void addRentedItems(ArrayList<Item> rentedItems){
+        for(Item item : rentedItems){
+            this.rentedItems.add(item);
+        }
+    }
+
     public ArrayList<Item> getReservedItems() {
         return reservedItems;
     }
@@ -148,4 +154,58 @@ public class Customer extends Person {
                     //pay()
                     //removeLateCharge()
     */
+
+    /**
+    * Rents an item and returns status of ability to be rented
+    * @param itemName - name of item to be rented
+    * @return success - True if item can be rented
+    */
+    public boolean rentItem(Store store, String itemName) {
+        //should only ever return one item
+        ArrayList<Item> item = store.searchForItems(itemName);
+        if(item.get(0).checkOutItem(this)) {
+            this.addRentedItems(item);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+    * Rents an item and returns status of ability to be rented
+    * @param itemNames - ArrayList of item names of items to be rented
+    * @return success - True if item can be rented
+    */
+    public boolean rentItems(Store store, ArrayList<String> itemNames) {
+        for(String itemName : itemNames) {
+            rentItem(store, itemName);
+        }
+    }
+
+    /**
+    * Rents an item and returns status of ability to be rented
+    * @param itemName - name of item to be returned
+    * @return success - True if item successfully returned
+    */
+    public boolean returnItem(String itemName) {
+        ArrayList<Item> item = store.searchForItems(itemName);
+        Item itemToRent = item.get(0);
+        itemToRent.returnToStock(this);
+
+        //checks on payment and late charges should go here
+        return true;
+    }
+
+    /**
+    * Rents an item and returns status of ability to be rented
+    * @param itemName - name of item to be returned
+    * @return success - True if item successfully returned
+    */
+    public boolean returnItem(ArrayList<String> itemNames) {
+        for(Item itemName : itemNames){
+            returnItem(itemName);
+        }
+        //checks on payment and late charges should go here
+        return true;
+    }
 }

@@ -235,6 +235,7 @@ public class Item {
     public void returnToStock() {
         this.inventoryAmount++;
         this.inStock = true;
+        //check for others waiting to reserve, give to first
     }
     
    /**
@@ -242,9 +243,16 @@ public class Item {
     *
     * @param cust: the customer checking out this item
     */
-    public void checkOutItem(Customer cust) {
-        this.inventoryAmount--;
-        this.customerRenting = cust;
+    public boolean checkOutItem(Customer cust) {
+        if(this.available) {
+            this.inventoryAmount--;
+            this.customerRenting = cust;
+            return true;
+        } else {
+            return false;
+        }
+
+        
     }
         
     
@@ -252,7 +260,11 @@ public class Item {
         if (this.available) {
             return "Available";
         } else if (this.onReserve) {
-            return "reserved";
+            String reservation = "Currently reserved by " + this.reservationList.size() + " customers:\n";
+            for(Customer cust : reservationList){
+                reservation += cust.getName() + "\n"
+            }
+            return reservation;
         } else if (!(this.inStock)) {
             return "Not in Stock";
         } else {

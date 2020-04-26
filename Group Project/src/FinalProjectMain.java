@@ -134,8 +134,8 @@ public class FinalProjectMain {
                     System.out.println("1. Change your account's name");
                     System.out.println("2. Reserve a Title");
                     System.out.println("3. Cancel Reservation");
-                    System.out.println("4. Something else");
-                    System.out.println("5. Something else");
+                    System.out.println("4. Rent a Title");
+                    System.out.println("5. Return a Title");
                     System.out.println("6. Something else");
 
                     System.out.print("\nInput: ");
@@ -160,6 +160,24 @@ public class FinalProjectMain {
                     } else if (input.equals("3")) {
 
                     } else if (input.equals("4")) {
+                        System.out.println("\nPlease input the name(s) of the title(s) for rental.\nItems should be entered one at a time, use \"end\" to stop inputting items");
+                        String itemName;
+                        ArrayList<String> itemList = new ArrayList<String>();
+                        do{
+                            System.out.print("\nTitle: ");
+                            itemName = scanner.nextLine();
+
+                            //ensure no blank entries
+                            if(itemName.trim().equals("")){
+                                System.out.println("Entries must not be blank!");
+                            } else {
+                                itemList.add(itemName.trim());
+                            }
+                            
+                        } while (!itemName.toLowerCase().trim().equals("end")){
+                            System.out.print("\nTitle: ");
+                            itemName
+                        }
 
                     } else if (input.equals("5")) {
 
