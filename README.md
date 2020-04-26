@@ -3,4 +3,4 @@
 Blake Wesel, Hansel Leal, Bryce Jones, Samuel Crouch, Regina Bass
 
 ## Class Diagram
-<img src="groupProject/assets/classDiagram.jpg" alt="Class Diagram" />
+<img src="Group Project/assets/ClassDiagram.jpg" alt="Class Diagram" />
