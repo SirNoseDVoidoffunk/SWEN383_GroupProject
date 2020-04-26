@@ -5,7 +5,7 @@
  *         Hansel Leal
  *         Bryce Jones
  *         Regina Bass
- *         Samual Crouch
+ *         Samuel Crouch
  */
 public class CD extends Item {
 
@@ -13,8 +13,8 @@ public class CD extends Item {
         super();
     }
 
-    public CD(boolean available, boolean onReserve, boolean inStock, int inventoryAmount, String name, String type) {
-        super(available, onReserve, inStock, inventoryAmount, name, type);
+    public CD(boolean available, boolean onReserve, boolean inStock, int inventoryAmount, double retailRate, String name, String type) {
+        super(available, onReserve, inStock, inventoryAmount, retailRate, name, type);
     }
     //empty class - no attributes or methods
 }

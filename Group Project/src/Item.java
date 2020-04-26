@@ -1,11 +1,11 @@
 /**
  * Item class that's used as the parent class of DVD and CD and to declare shared methods for both of those classes
- * @version 4/25/20
+ * @version 4/26/20
  * @author Blake Wesel
  *         Hansel Leal
  *         Bryce Jones
  *         Regina Bass
- *         Samual Crouch
+ *         Samuel Crouch
  */
 
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ public class Item {
     private Customer customerRenting;
     private ArrayList<Customer> reservationList;
     private Date retailPeriod;
+    private double retailRate;
     private Date returnDate;
     private String name;
     private String type;
@@ -36,18 +37,20 @@ public class Item {
         customerRenting = null;
         reservationList = new ArrayList<Customer>();
         retailPeriod = null;
+        retailRate = 0;
         returnDate = null;
         name = "";
         type = "";
         item_id = -1;
     }
 
-    public Item(boolean available, boolean onReserve, boolean inStock, int inventoryAmount, String name, String type) {
+    public Item(boolean available, boolean onReserve, boolean inStock, int inventoryAmount, double retailRate, String name, String type) {
 
         this.available = available;
         this.onReserve = onReserve;
         this.inStock = inStock;
         this.inventoryAmount = inventoryAmount;
+        this.retailRate = retailRate;
         this.name = name;
         this.type = type;
 
@@ -125,6 +128,10 @@ public class Item {
     public void setRetailPeriod(Date retailPeriod) {
         this.retailPeriod = retailPeriod;
     }
+
+    public double getRetailRate() { return retailRate; }
+
+    public void setRetailRate(double retailRate) { this.retailRate = retailRate; }
 
     public Date getReturnDate() {
         return returnDate;
@@ -211,8 +218,6 @@ public class Item {
                 //returnToStock()
                 //checkOutItem()
                 //checkStatus()
-                //setRetailRate()
-                //setRetailPeriod()
 
     */
     

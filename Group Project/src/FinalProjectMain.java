@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -9,7 +11,7 @@ import java.util.Scanner;
  *         Hansel Leal
  *         Bryce Jones
  *         Regina Bass
- *         Samual Crouch
+ *         Samuel Crouch
  */
 public class FinalProjectMain {
 
@@ -23,12 +25,12 @@ public class FinalProjectMain {
 
         // create all Store, Inventory, and item objects here
 
-        Item item1 = new Item(true, false, true, 3, "Star Wars: The Clone Wars", "DVD");
-        Item item2 = new Item(true, false, true, 2, "James Bond: Skyfall", "DVD");
-        Item item3 = new Item(true, false, true, 1, "Indiana Jones: The Lost Arch", "DVD");
-        Item item4 = new Item(true, false, true, 4, "Classical Music", "CD");
-        Item item5 = new Item(true, false, true, 3, "1990's Hits", "CD");
-        Item item6 = new Item(true, false, true, 3, "2000's Hits", "CD");
+        Item item1 = new Item(true, false, true, 3, 4.99, "Star Wars: The Clone Wars", "DVD");
+        Item item2 = new Item(true, false, true, 2, 4.99, "James Bond: Skyfall", "DVD");
+        Item item3 = new Item(true, false, true, 1, 4.99, "Indiana Jones: The Lost Arch", "DVD");
+        Item item4 = new Item(true, false, true, 4, 3.99, "Classical Music", "CD");
+        Item item5 = new Item(true, false, true, 3, 3.99, "1990's Hits", "CD");
+        Item item6 = new Item(true, false, true, 3, 3.99, "2000's Hits", "CD");
         ArrayList<Item> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
@@ -179,8 +181,8 @@ public class FinalProjectMain {
                     System.out.println("0. Exit to main menu");
                     System.out.println("1. Something Else");
                     System.out.println("2. Something else");
-                    System.out.println("3. Something else");
-                    System.out.println("4. Something else");
+                    System.out.println("3. Set Retail Period");
+                    System.out.println("4. Set Retail Rate");
                     System.out.println("5. Something else");
                     System.out.println("6. Something else");
 
@@ -201,11 +203,47 @@ public class FinalProjectMain {
 
                     } else if (input.equals("3")) {
 
-                        // action code goes here
+                        // Business Requirement 7.1
+
+                        System.out.println("\nEnter a title to update the retail period of");
+                        System.out.print("\nInput: ");
+                        String title_name = scanner.nextLine();
+                        // If needed, update format to expected format!!!
+                        System.out.println("\nEnter a retail period (as MM/DD/YYYY)");
+                        System.out.print("\nInput: ");
+                        String periodString = scanner.nextLine();
+                        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                        try {
+                            Date retail_period = formatter.parse(periodString);
+                            if(manager.setRetailPeriod(title_name, retail_period)) {
+                                System.out.println("\nThe retail period of "+title_name+" was successfully updated to "+retail_period);
+                            } else {
+                                System.out.println("\nThe retail period could not be updated. Check the input title");
+                            }
+                        } catch (ParseException e) {
+                            System.out.println("\nThe retail period was not formatted correctly, try again");
+                        }
 
                     } else if (input.equals("4")) {
 
-                        // action code goes here
+                        // Business Requirement 7.2
+
+                        System.out.println("\nEnter a title to update the retail rate of");
+                        System.out.print("\nInput: ");
+                        String title_name = scanner.nextLine();
+                        System.out.println("\nEnter a retail rate");
+                        System.out.print("\nInput: ");
+                        String rateString = scanner.nextLine();
+                        try {
+                            double retail_rate = Double.parseDouble(rateString);
+                            if (manager.setRetailRate(title_name, retail_rate)) {
+                                System.out.println("\nThe retail rate of " + title_name + " was successfully updated to " + retail_rate);
+                            } else {
+                                System.out.println("\nThe retail rate could not be updated. Check the input title");
+                            }
+                        } catch (NumberFormatException e){
+                            System.out.println("\nThe retail rate was not formatted correctly, try again");
+                        }
 
                     } else if (input.equals("5")) {
 

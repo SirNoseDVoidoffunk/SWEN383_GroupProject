@@ -1,13 +1,14 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Manager class that's used to represent a manager and declare manager-specific methods
- * @version 4/25/20
+ * @version 4/26/20
  * @author Blake Wesel
  *         Hansel Leal
  *         Bryce Jones
  *         Regina Bass
- *         Samual Crouch
+ *         Samuel Crouch
  */
 
 public class Manager extends Employee {
@@ -50,11 +51,42 @@ public class Manager extends Employee {
             cust_list.remove(cust);
             return true;
         }
-
     }
+
+    /**
+     * Sets an item's retail period
+     * @param name - The name of the item to be updated
+     * @param period - The new retail period
+     * @return success - True if the retail period was successfully updated
+     */
+    public boolean setRetailPeriod(String name, Date period) {
+        for(Item item : this.store.getInventoryList()) {
+            if(item.getName().equals(name)) {
+                item.setRetailPeriod(period);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Sets an item's retail rate
+     * @param name - The name of the item to be updated
+     * @param rate - The new retail rate
+     * @return success - True if the retail period was successfully updated
+     */
+    public boolean setRetailRate(String name, double rate) {
+        for(Item item : this.store.getInventoryList()) {
+            if(item.getName().equals(name)) {
+                item.setRetailRate(rate);
+                return true;
+            }
+        }
+        return false;
+    }
+
     //addItem()
     //removeItem()
-    //setRentalRate()
     //getCustomerReport()
     //removeLateCharge()
     //createInventoryReport()
