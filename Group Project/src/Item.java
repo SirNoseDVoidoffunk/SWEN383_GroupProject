@@ -254,8 +254,7 @@ public class Item {
     * @param cust: the customer checking out this item
     */
     public boolean checkOutItem(Customer cust) {
-        if(this.available) {
-            this.setInventoryAmount(this.inventoryAmount-1);
+        if(this.available && this.setInventoryAmount(this.inventoryAmount-1)) {
             this.customerRenting = cust;
             return true;
         } else {
@@ -268,7 +267,7 @@ public class Item {
     
     public String checkStatus() {
         if (this.available) {
-            return "Available";
+            return "Title: "+this.name+"\nStatus: Available";
         } else if (this.onReserve) {
             String reservation = "Currently reserved by " + this.reservationList.size() + " customers:\n";
             for(Customer cust : reservationList){
