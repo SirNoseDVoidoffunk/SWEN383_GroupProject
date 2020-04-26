@@ -199,7 +199,13 @@ public class FinalProjectMain {
 
                     } else if (input.equals("2")) {
 
-                        // action code goes here
+                        // Business Requirement 11
+                        String file_Name = manager.createInventoryReport();
+                        if(!file_Name.equals("")) {
+                            System.out.println("\nInventory report ("+file_Name+") created");
+                        } else {
+                            System.out.println("\nThe inventory report could not be created");
+                        }
 
                     } else if (input.equals("3")) {
 
@@ -251,13 +257,7 @@ public class FinalProjectMain {
 
                     } else if (input.equals("6")) {
 
-                        // Business Requirement 11
-                        String file_Name = manager.createInventoryReport();
-                        if(!file_Name.equals("")) {
-                            System.out.println("\nInventory report ("+file_Name+") created");
-                        } else {
-                            System.out.println("\nThe inventory report could not be created");
-                        }
+                        // action code goes here
 
                     }
                 }

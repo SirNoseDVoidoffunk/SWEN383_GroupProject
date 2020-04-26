@@ -61,7 +61,7 @@ public class Manager extends Employee {
      */
     public boolean setRetailPeriod(String name, Date period) {
         for(Item item : this.store.getInventoryList()) {
-            if(item.getName().equals(name)) {
+            if(item.getName().toLowerCase().equals(name.toLowerCase())) {
                 item.setRetailPeriod(period);
                 return true;
             }
@@ -77,7 +77,7 @@ public class Manager extends Employee {
      */
     public boolean setRetailRate(String name, double rate) {
         for(Item item : this.store.getInventoryList()) {
-            if(item.getName().equals(name)) {
+            if(item.getName().toLowerCase().equals(name.toLowerCase())) {
                 item.setRetailRate(rate);
                 return true;
             }
