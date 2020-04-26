@@ -136,6 +136,17 @@ public class Customer extends Person {
         }
     }
 
+    public boolean cancelReservation(Item item) {
+        reservedItems.remove(item);
+        item.cancelReservation(this);
+
+        int transaction_num = (int)(Math.random() * 10000000);
+        Reservation reservation = new Reservation(transaction_num, this, item.getName(), item.getItemId(), "cancel");
+        boolean status = reservation.logTransaction();
+        reservation = null; // delete of the reservation object
+        return status;
+    }
+
     /*
 ---------------------------------------------------------------------------------------------------------------
                     Additional methods below

@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -157,7 +158,61 @@ public class FinalProjectMain {
 
                     } else if (input.equals("2")) {
 
+                        // Business Requirement 2.1
+                        boolean choosing_item = false;
+                        Item chosen_item = null;
+
+                        while(!choosing_item) {
+
+                            System.out.println("Here are the list of titles we have: ");
+                            ArrayList<Item> items_list = store.getInventoryList();
+                            for (int i = 0; i < items_list.size(); i++) {
+                                System.out.println(i + ". " + items_list.get(i).getName());
+                            }
+
+                            System.out.print("\nPlease write the number that you wish to reserve: ");
+                            input = scanner.nextLine();
+
+                            if (Integer.parseInt(input) < items_list.size()) {
+                                choosing_item = true;
+                                chosen_item = items.get(Integer.parseInt(input));
+                            } else {
+                                System.out.println("Sorry that's not an option, please try again!");
+                            }
+                        }
+
+                        if(chosen_item.getCustomerPlace(cust) == -1) {
+                            if (cust.reserveItem(chosen_item)) {
+                                System.out.println("\nWe successfully reserved that item for you! You are position " +
+                                        (chosen_item.getCustomerPlace(cust) + 1) + " for " + chosen_item.getName());
+                            }
+                        } else {
+                            System.out.println("\nYou are already on the reservation list and are position " +
+                                    (chosen_item.getCustomerPlace(cust) + 1) + " for " + chosen_item.getName());
+                        }
+
                     } else if (input.equals("3")) {
+                        // Business Requirement 2.2
+
+                        if(cust.getReservedItems().size() != 0) {
+                            System.out.println("\nHere are the item's you current are reserving:");
+                            for(int i = 0; i < cust.getReservedItems().size(); i++) {
+                                System.out.println( i + ". " + cust.getReservedItems().get(i).getName());
+                            }
+                            System.out.println("\nWhich item would you like to cancel your reservation for?");
+                            System.out.print("\nInput: ");
+                            input = scanner.nextLine();
+                            if(Integer.parseInt(input) < cust.getReservedItems().size()) {
+                                if(cust.cancelReservation(cust.getReservedItems().get(Integer.parseInt(input)))) {
+                                    System.out.println("\nWe have successfully removed your reservation.");
+                                } else {
+                                    System.out.println("\nWe were unable to cancel your reservation at this time, please " +
+                                                       "try again later");
+                                }
+                            }
+                        } else {
+                            System.out.println("\nYou currently don't have any items reserved!");
+                        }
 
                     } else if (input.equals("4")) {
 

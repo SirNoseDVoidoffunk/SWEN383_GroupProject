@@ -259,4 +259,13 @@ public class Item {
             return "";
         }
     }
+
+    /**
+     * Returns the position of where the customer is on the reservation list
+     * @param cust - The customer on the reservation list
+     * @return placement - Where on the list the customer is
+     */
+    public int getCustomerPlace(Customer cust) {
+        return reservationList.indexOf(cust);
+    }
 }
