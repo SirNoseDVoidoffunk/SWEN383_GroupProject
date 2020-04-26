@@ -176,11 +176,44 @@ public class FinalProjectMain {
                             
                         } while (!itemName.toLowerCase().trim().equals("end")){
                             System.out.print("\nTitle: ");
-                            itemName
+                            itemName = scanner.nextLine();
+
+                             //ensure no blank entries
+                            if(itemName.trim().equals("")){
+                                System.out.println("Entries must not be blank!");
+                            } else {
+                                itemList.add(itemName.trim());
+                            }
                         }
+                        cust.rentItems(this.store, itemList);
 
                     } else if (input.equals("5")) {
+                        System.out.println("\nPlease input the name(s) of the title(s) for return.\nItems should be entered one at a time, use \"end\" to stop inputting items");
+                        String itemName;
+                        ArrayList<String> itemList = new ArrayList<String>();
+                        do{
+                            System.out.print("\nTitle: ");
+                            itemName = scanner.nextLine();
 
+                            //ensure no blank entries
+                            if(itemName.trim().equals("")){
+                                System.out.println("Entries must not be blank!");
+                            } else {
+                                itemList.add(itemName.trim());
+                            }
+                            
+                        } while (!itemName.toLowerCase().trim().equals("end")){
+                            System.out.print("\nTitle: ");
+                            itemName = scanner.nextLine();
+
+                             //ensure no blank entries
+                            if(itemName.trim().equals("")){
+                                System.out.println("Entries must not be blank!");
+                            } else {
+                                itemList.add(itemName.trim());
+                            }
+                        }
+                        cust.returnItems(itemList);
                     } else if (input.equals("6")) {
 
                     }

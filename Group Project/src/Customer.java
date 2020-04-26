@@ -180,6 +180,8 @@ public class Customer extends Person {
         for(String itemName : itemNames) {
             rentItem(store, itemName);
         }
+        //check payment and things to finalize rental
+        return true;
     }
 
     /**
@@ -198,7 +200,7 @@ public class Customer extends Person {
 
     /**
     * Rents an item and returns status of ability to be rented
-    * @param itemName - name of item to be returned
+    * @param itemNames - ArrayList of item names of items to be returned
     * @return success - True if item successfully returned
     */
     public boolean returnItem(ArrayList<String> itemNames) {
