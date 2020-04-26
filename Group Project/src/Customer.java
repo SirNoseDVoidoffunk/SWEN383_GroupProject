@@ -17,12 +17,28 @@ public class Customer extends Person {
     private ArrayList<Charge> finesOwed;
     private String creditCardNumber;
     private String creditCardExp;
+    private String creditCardInfo;
     private ArrayList<Item> rentedItems;
     private ArrayList<Item> reservedItems;
 
     //constructors
 
     public Customer() {
+        customer_account_status = "";
+        accountBalance = 0.0;
+        creditCardNumber = "";
+        creditCardExp = "";
+        finesOwed = new ArrayList<Charge>();
+        rentedItems = new ArrayList<Item>();
+        reservedItems = new ArrayList<Item>();
+    }
+
+    public Customer(int id, String name, String home_address, String mobile_phone, String home_phone, String email_address,
+                    String creditCardInfo, String password) {
+
+        super(id, name, home_address, mobile_phone, home_phone, email_address, password);
+        this.creditCardInfo = creditCardInfo;
+
         customer_account_status = "";
         accountBalance = 0.0;
         creditCardNumber = "";

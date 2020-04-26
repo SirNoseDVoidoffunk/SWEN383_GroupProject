@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Employee class that's used as a parent class to clerk and manager where shard methods are declared here
  * @version 4/25/20
@@ -37,7 +39,7 @@ public class Employee {
    /**
     * Modifies an existing customer's information
     */
-    public void modifyCustomer(Customer cust, String name, String addr, int phone, String email, CreditCard ccInfo) {
+    public void modifyCustomer(Customer cust, String name, String addr, String phone, String email, CreditCard ccInfo) {
         cust.setName(name);
         cust.setHome_address(addr);
         cust.setMobile_phone(phone);
