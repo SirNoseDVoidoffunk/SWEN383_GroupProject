@@ -192,7 +192,7 @@ public class Customer extends Person {
     public boolean returnItem(String itemName) {
         ArrayList<Item> item = store.searchForItems(itemName);
         Item itemToReturn = item.get(0);
-        itemToReturn.returnToStock(this);
+        itemToReturn.returnToStock();
         this.rentedItems.remove(itemToReturn);
         //checks on payment and late charges should go here
         return true;

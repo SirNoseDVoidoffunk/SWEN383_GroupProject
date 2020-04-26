@@ -90,8 +90,18 @@ public class Item {
         return inventoryAmount;
     }
 
-    public void setInventoryAmount(int inventoryAmount) {
-        this.inventoryAmount = inventoryAmount;
+    public boolean setInventoryAmount(int inventoryAmount) {
+        
+        //check if last copy, send alert accordingly
+        if(this.inventoryAmount <= 1 || inventoryAmount <= 1){
+            //send alert about last copy
+            this.setInStock(false);
+            this.setAvailable(false);
+            return false;
+        } else {
+            this.inventoryAmount = inventoryAmount;
+            return true;
+        }
     }
 
     public Customer getCustomerReserving() {
@@ -245,7 +255,7 @@ public class Item {
     */
     public boolean checkOutItem(Customer cust) {
         if(this.available) {
-            this.inventoryAmount--;
+            this.setInventoryAmount(this.inventoryAmount-1);
             this.customerRenting = cust;
             return true;
         } else {
