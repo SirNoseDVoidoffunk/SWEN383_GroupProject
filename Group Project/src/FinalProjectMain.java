@@ -63,6 +63,28 @@ public class FinalProjectMain {
                     System.out.println("Login failed");
                 }
             }
+            
+            else if(input.equals("2")) {
+                System.out.println("\nYou are new! Fill in the manager data:");
+                //Manager Credentials Below
+                
+                
+            }
+            
+            else{
+               //if input does not equal 1 or 2
+               System.out.print("\nNot a valid selection. Select 1 or 2:");
+               //scanner cursor still needs to be fixed
+               scanner.nextLine();
+               scanner.nextLine();
+               input = scanner.nextLine(); 
+               
+               
+            }
+
+            
+            
+            
         }
 
 
