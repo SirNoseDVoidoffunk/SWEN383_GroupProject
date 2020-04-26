@@ -14,6 +14,7 @@ import java.util.Date;
 public class Item {
     //class attributes
     private boolean available;
+    private boolean onReserve;
     private boolean inStock;
     private int inventoryAmount;
     private Customer customerReserving;
@@ -28,6 +29,7 @@ public class Item {
     //constructors
     public Item() {
         available = false;
+        onReserve = false;
         inStock = false;
         inventoryAmount = 0;
         customerReserving = null;
@@ -40,9 +42,10 @@ public class Item {
         item_id = -1;
     }
 
-    public Item(boolean available, boolean inStock, int inventoryAmount, String name, String type) {
+    public Item(boolean available, boolean onReserve, boolean inStock, int inventoryAmount, String name, String type) {
 
         this.available = available;
+        this.onReserve = onReserve;
         this.inStock = inStock;
         this.inventoryAmount = inventoryAmount;
         this.name = name;
@@ -65,6 +68,14 @@ public class Item {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public boolean isOnReserve() {
+        return onReserve;
+    }
+
+    public void setOnReserve(boolean onReserve) {
+        this.onReserve = onReserve;
     }
 
     public boolean isInStock() {
@@ -157,14 +168,15 @@ public class Item {
     public boolean placeOnReserve(Customer cust) {
 
         // if the item is available then reserve it
-        if(available) {
+        if(available && !onReserve) {
+            this.onReserve = true;
             this.customerReserving = cust;
             this.reservationList.add(cust);
 
             available = false;
             return true;
         // if the item is not available (not in stock) or it's reserved then add to reservation list
-        } else if(!available) {
+        } else if(!available || onReserve) {
             this.reservationList.add(cust);
             return true;
         }
@@ -182,6 +194,7 @@ public class Item {
                 reservationList.remove(cust);
                 if(reservationList.size() == 0) {
                     available = true;
+                    onReserve = false;
                 }
             // if the customer is only on the reservation list
             } else {
@@ -193,14 +206,12 @@ public class Item {
     /*
 -------------------------------------------------------------------------------------------------------------------
                 additional methods below
-
                 //placeOnHold()
                 //returnToStock()
                 //checkOutItem()
                 //checkStatus()
                 //setRetailRate()
                 //setRetailPeriod()
-
     */
     
     /*  Added to improve ArrayList functionality for the Inventory class. Since each item has an inventory amount, it is assumed that
@@ -238,10 +249,21 @@ public class Item {
     public String checkStatus() {
         if (this.available) {
             return "Available";
+        } else if (this.onReserve) {
+            return "reserved";
         } else if (!(this.inStock)) {
             return "Not in Stock";
         } else {
             return "";
         }
+    }
+
+    /**
+     * Returns the position of where the customer is on the reservation list
+     * @param cust - The customer on the reservation list
+     * @return placement - Where on the list the customer is
+     */
+    public int getCustomerPlace(Customer cust) {
+        return reservationList.indexOf(cust);
     }
 }
