@@ -23,12 +23,12 @@ public class FinalProjectMain {
 
         // create all Store, Inventory, and item objects here
 
-        Item item1 = new Item(true, true, 3, "Star Wars: The Clone Wars", "DVD");
-        Item item2 = new Item(true, true, 2, "James Bond: Skyfall", "DVD");
-        Item item3 = new Item(true, true, 1, "Indiana Jones: The Lost Arch", "DVD");
-        Item item4 = new Item(true, true, 4, "Classical Music", "CD");
-        Item item5 = new Item(true, true, 3, "1990's Hits", "CD");
-        Item item6 = new Item(true, true, 3, "2000's Hits", "CD");
+        Item item1 = new Item(true, false, true, 3, "Star Wars: The Clone Wars", "DVD");
+        Item item2 = new Item(true, false, true, 2, "James Bond: Skyfall", "DVD");
+        Item item3 = new Item(true, false, true, 1, "Indiana Jones: The Lost Arch", "DVD");
+        Item item4 = new Item(true, false, true, 4, "Classical Music", "CD");
+        Item item5 = new Item(true, false, true, 3, "1990's Hits", "CD");
+        Item item6 = new Item(true, false, true, 3, "2000's Hits", "CD");
         ArrayList<Item> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
@@ -219,16 +219,18 @@ public class FinalProjectMain {
                            scanner.nextLine();    // Fix cursor
                            System.out.print("\nType: ");
                            String type = scanner.nextLine();
+                           type = type.toUpperCase();
                            System.out.println("You have entered a " + type + ": " + title);
                            System.out.println("There are " + inventoryAmount + " in stock.");
-                           Item item = new Item(true, true, inventoryAmount, title, type);
+                           Item item = new Item(true, false, true, inventoryAmount, title, type);
                            items.add(item);
                            
-                           System.out.println("\nHere is the complete list of titles in your inventory:");
-                           System.out.println("-------------------------------------------------------");
+                           System.out.println("\nHere is the complete list of titles in your inventory:\n");
+                           System.out.format("%-25s%25s%10s", "Title", "Inventory Amount", "Type\n");
+                           System.out.println("--------------------------------------------------------------");
                             for(Item num:items){
                                //this call may vary depending on the book implementation
-                               System.out.println(num.getName());
+                               System.out.format("%-30s%12d%18s", num.getName(), num.getInventoryAmount(), num.getType() + "\n");
                             }
                            
                            System.out.print("\nWould you like to add another selection? (y/n) ");
