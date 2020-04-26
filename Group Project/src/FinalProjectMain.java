@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.Iterator;
 
 /**
  * Main class that's used to run the program
@@ -180,9 +181,9 @@ public class FinalProjectMain {
                     System.out.println("1. Something Else");
                     System.out.println("2. Something else");
                     System.out.println("3. Something else");
-                    System.out.println("4. Add Item(s)");
-                    System.out.println("5. Something else");
-                    System.out.println("6. Something else");
+                    System.out.println("4. Something else");
+                    System.out.println("5. Add Item(s)");
+                    System.out.println("6. Delete item");
 
                     System.out.print("\nInput: ");
                     input = scanner.nextLine();
@@ -204,11 +205,14 @@ public class FinalProjectMain {
                         // action code goes here
 
                     } else if (input.equals("4")) {
+                    
+                        // action code goes here
+
+                    } else if (input.equals("5")) {
 
                         // Business Requirement 5.1 and 6.1
                         // Manager can add item(s)
                         boolean cont = true;
-                        int count = 7;
                         
                         while(cont){
                            System.out.println("\nEnter Information below.");
@@ -238,8 +242,7 @@ public class FinalProjectMain {
                            ans = ans.toUpperCase();
                            if(ans.equals("Y") || ans.equals("YES")){
                               // Debug: System.out.println("You answered yes");
-                              cont = true; 
-                              count++;  
+                              cont = true;  
                            }
                            else{
                               //Debug: System.out.println("You answered something other than yes");
@@ -247,13 +250,35 @@ public class FinalProjectMain {
                            }
                         }
 
-                    } else if (input.equals("5")) {
-
-                        // action code goes here
-
                     } else if (input.equals("6")) {
 
-                        // action code goes here
+                        //Business Requirement 5.2 and 6.2
+                        String selection ="";
+                        
+                        System.out.println("Enter the name of item:");
+                        selection = scanner.nextLine();
+                        
+                        /*for(int i=0; i < items.size(); i++){
+                           if(i.equals(selection))
+                        
+                        }*/
+                        
+                        Iterator<Item> itr = items.iterator(); 
+                        while(itr.hasNext()){
+                           Item nxt = itr.next();
+                           
+                           try{
+                              if(nxt.getName().equals(selection)){
+                                 items.remove(nxt);
+                                 System.out.println("Success!");
+                                 break;
+                              }
+                           }
+                           catch(Exception e){
+                              System.out.println("No item by that title");
+                           }
+                        }
+                        
 
                     }
                 }
