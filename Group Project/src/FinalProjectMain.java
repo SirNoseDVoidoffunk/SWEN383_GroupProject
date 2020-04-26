@@ -180,7 +180,7 @@ public class FinalProjectMain {
                     System.out.println("1. Something Else");
                     System.out.println("2. Something else");
                     System.out.println("3. Something else");
-                    System.out.println("4. Something else");
+                    System.out.println("4. Add Item(s)");
                     System.out.println("5. Something else");
                     System.out.println("6. Something else");
 
@@ -205,7 +205,32 @@ public class FinalProjectMain {
 
                     } else if (input.equals("4")) {
 
-                        // action code goes here
+                        // Business Requirement 5.1 and 6.1
+                        // Manager can add item(s)
+                        boolean cont = true;
+                        
+                        while(cont){
+                           System.out.println("\nEnter Information below.");
+                           System.out.print("\nTitle: ");
+                           String title = scanner.nextLine();
+                           System.out.print("\nInventory Amount: ");
+                           String inventoryAmount = scanner.nextLine();
+                           System.out.print("\nType: ");
+                           String type = scanner.nextLine();
+                           System.out.println("You have entered a " + type + ": " + title);
+                           System.out.println("There are " + inventoryAmount + " in stock.");
+                           
+                           System.out.print("\nWould you like to add another selection? (y/n) ");
+                           String ans = scanner.nextLine();
+                           ans = ans.toUpperCase();
+                           if(ans.equals("Y") || ans.equals("YES")){
+                              System.out.println("You answered yes");
+                              cont = true;   
+                           }
+                           else{
+                              cont = false;
+                           }
+                        }
 
                     } else if (input.equals("5")) {
 
