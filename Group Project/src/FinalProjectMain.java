@@ -279,8 +279,8 @@ public class FinalProjectMain {
                            System.out.print("\nType: ");
                            String type = scanner.nextLine();
                            type = type.toUpperCase();
-                           System.out.println("You have entered a " + type + ": " + title);
-                           System.out.println("There are " + inventoryAmount + " in stock.");
+                           //Debug :System.out.println("You have entered a " + type + ": " + title);
+                           //Debug: System.out.println("There are " + inventoryAmount + " in stock.");
                            Item item = new Item(true, false, true, inventoryAmount, title, type);
                            items.add(item);
                            
@@ -312,6 +312,7 @@ public class FinalProjectMain {
                         
                         System.out.println("Enter the name of item:");
                         selection = scanner.nextLine();
+                        selection = selection.toUpperCase();
                         
                         /*for(int i=0; i < items.size(); i++){
                            if(i.equals(selection))
@@ -323,7 +324,7 @@ public class FinalProjectMain {
                            Item nxt = itr.next();
                            
                            try{
-                              if(nxt.getName().equals(selection)){
+                              if(nxt.getName().toUpperCase().equals(selection)){
                                  items.remove(nxt);
                                  System.out.println("Success!");
                                  break;
