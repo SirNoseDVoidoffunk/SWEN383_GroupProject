@@ -100,4 +100,33 @@ public class Manager extends Employee {
         return inventoryReport.getReport();
     }
 
+    /**
+     * Creates a customer report
+     * @param type - The specific report type to be created
+     * @return String - The name of the generated text file
+     */
+    public String createCustomerReport(String type) {
+        CustomerReport customerReport = new CustomerReport();
+        for(Customer cust : this.store.getCustomerList()) {
+            if(type.equals("all")) {
+                customerReport.addCustomer(cust);
+            } else if(type.equals("overdue")) {
+                boolean addcust = false;
+                for(Item item : cust.getRentedItems()) {
+                    if(item.getReturnDate().before(new Date())) {
+                        addcust = true;
+                    }
+                }
+                if(addcust) {
+                    customerReport.addCustomer(cust);
+                }
+            } else if(type.equals("fines")) {
+                if(cust.getFinesOwed().size()>0) {
+                    customerReport.addCustomer(cust);
+                }
+            }
+        }
+        return customerReport.getReport();
+    }
+
 }

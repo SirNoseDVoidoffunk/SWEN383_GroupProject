@@ -5,7 +5,7 @@
  *         Hansel Leal
  *         Bryce Jones
  *         Regina Bass
- *         Samual Crouch
+ *         Samuel Crouch
  */
 
 import java.io.FileWriter;

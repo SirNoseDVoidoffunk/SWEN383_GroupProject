@@ -110,6 +110,8 @@ public class FinalProjectMain {
             int id = (int) (Math.random() * 10000000); // user_id
             cust = new Customer(id, "name", "addy", "978", "978", "email", "info", "pass");
             manager = new Manager(store, inventory, id, "name", "addy", "978", "978", "email", "info", "pass");
+
+            store.addCustomerToList(cust);
         }
 
         boolean doneUsingCustomer = false;
@@ -179,12 +181,12 @@ public class FinalProjectMain {
 
                     System.out.println("\nHere are your menu actions:\n");
                     System.out.println("0. Exit to main menu");
-                    System.out.println("1. Something Else");
-                    System.out.println("2. Something else");
+                    System.out.println("1. Create Customer Report");
+                    System.out.println("2. Create Inventory Report");
                     System.out.println("3. Set Retail Period");
                     System.out.println("4. Set Retail Rate");
                     System.out.println("5. Something else");
-                    System.out.println("6. Create Inventory Report");
+                    System.out.println("6. Something else");
 
                     System.out.print("\nInput: ");
                     input = scanner.nextLine();
@@ -195,16 +197,38 @@ public class FinalProjectMain {
 
                     } else if (input.equals("1")) {
 
-                        // action code goes here
+                        // Business Requirement 10
+                        System.out.println("\nChoose a report type:\n");
+                        System.out.println("1. All customers");
+                        System.out.println("2. Customers with overdue items");
+                        System.out.println("3. Customers with fines");
+
+                        System.out.print("\nInput: ");
+                        input = scanner.nextLine();
+
+                        String file_name = "";
+                        if (input.equals("1")) {
+                            file_name = manager.createCustomerReport("all");
+                        } else if (input.equals("2")) {
+                            file_name = manager.createCustomerReport("overdue");
+                        } else if (input.equals("3")) {
+                            file_name = manager.createCustomerReport("fines");
+                        }
+
+                        if(!file_name.equals("")) {
+                            System.out.println("\nCustomer report ("+file_name+") created");
+                        } else {
+                            System.out.println("\nThe customer report could not be created, try again");
+                        }
 
                     } else if (input.equals("2")) {
 
                         // Business Requirement 11
-                        String file_Name = manager.createInventoryReport();
-                        if(!file_Name.equals("")) {
-                            System.out.println("\nInventory report ("+file_Name+") created");
+                        String file_name = manager.createInventoryReport();
+                        if(!file_name.equals("")) {
+                            System.out.println("\nInventory report ("+file_name+") created");
                         } else {
-                            System.out.println("\nThe inventory report could not be created");
+                            System.out.println("\nThe inventory report could not be created, try again");
                         }
 
                     } else if (input.equals("3")) {
