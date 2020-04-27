@@ -202,40 +202,13 @@ public class Item {
     public void cancelReservation(Customer cust) {
         if(!this.reservationList.isEmpty()) {
             // if the customer is at the top of the list
-            if(reservationList.indexOf(cust) == 0) {
+            if(reservationList.indexOf(cust) != -1) {
                 reservationList.remove(cust);
                 if(reservationList.size() == 0) {
                     available = true;
                     onReserve = false;
                 }
-            // if the customer is only on the reservation list
-            } else {
-                reservationList.remove(cust);
             }
-        }
-    }
-
-    /*
--------------------------------------------------------------------------------------------------------------------
-                additional methods below
-
-                //checkOutItem()
-                //checkStatus()
-                //setRetailRate()
-                //setRetailPeriod()
-
-    */
-    
-    /*  Added to improve ArrayList functionality for the Inventory class. Since each item has an inventory amount, it is assumed that
-        there should not be multiple objects with the same name and type (with the second attribute only being included in case there
-        is a DVD and CD with the same name). Let me know if you think otherwise. ~Sam */
-    @Override
-    public boolean equals(Object o){
-        if(o instanceof Item){
-            Item i = (Item) o;
-            return (this.name.equals(i.getName()) && this.type.equals(i.getType()));
-        } else {
-            return false;
         }
     }
    
