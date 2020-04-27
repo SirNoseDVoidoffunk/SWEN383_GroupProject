@@ -24,6 +24,7 @@ public class CreditCard extends Payment {
     }
 
     public CreditCard(String cardNumber, String cvv, String expiration) {
+        super();
         this.cardNumber = cardNumber;
         this.cvv = cvv;
         this.expiration = expiration;
@@ -31,11 +32,17 @@ public class CreditCard extends Payment {
 
     /**
      * This method would call the interface and make sure the credit card information is correct, however, for the POC,
-     * we are automatically returning true with the impression that in full scale development, this method will be implemented
+     * we are only checking the amount suffices with the impression that in full scale development, this method will be
+     * implemented properly and completely
      * @return success - True if the transaction was approve, False if not
      */
-    public boolean approve() {
-        return true;
+    @Override
+    public boolean approve(double amountDue, double amountIssued, String currency) {
+        if(amountDue <= amountIssued){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //accesors and mutators

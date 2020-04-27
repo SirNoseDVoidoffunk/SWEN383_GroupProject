@@ -95,4 +95,16 @@ public class Reservation extends Transaction {
     public void setReservation_status(String reservation_status) {
         this.reservation_status = reservation_status;
     }
+
+    /**
+     * Logs the transaction to the regional control computer
+     * @return status - True if the transaction was able to be logged into the regional control computers
+     */
+    public boolean logTransaction() {
+        // this is where we would connect to the regional control computer and log the transaction
+        // For the POC, we are only return true in assumption this action gets carried out when in full development
+        // all of the variables such as store_id, customer_id, item_id, bought date, and return date are stored above
+        // as class variables
+        return true;
+    }
 }

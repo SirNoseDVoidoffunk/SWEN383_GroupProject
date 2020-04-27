@@ -20,8 +20,9 @@ public class Item {
     private Customer customerReserving;
     private Customer customerRenting;
     private ArrayList<Customer> reservationList;
-    private Date retailPeriod;
+    private double retailPeriod = 5000; // hard coded for demonstration purposes
     private Date returnDate;
+    private double rentailRate;
     private String name;
     private String type;
     private int item_id;
@@ -35,11 +36,11 @@ public class Item {
         customerReserving = null;
         customerRenting = null;
         reservationList = new ArrayList<Customer>();
-        retailPeriod = null;
         returnDate = null;
         name = "";
         type = "";
         item_id = -1;
+        rentailRate = 19.95;
     }
 
     public Item(boolean available, boolean onReserve, boolean inStock, int inventoryAmount, String name, String type) {
@@ -51,11 +52,13 @@ public class Item {
         this.name = name;
         this.type = type;
 
+        this.rentailRate = 19.95; // hard coded
+
         // attribute set during rental period
         this.customerReserving = null;
         this.customerRenting = null;
         this.reservationList = new ArrayList<Customer>();
-        this.retailPeriod = null;
+
         this.returnDate = null;
 
     }
@@ -118,11 +121,11 @@ public class Item {
         this.reservationList = reservationList;
     }
 
-    public Date getRetailPeriod() {
+    public double getRetailPeriod() {
         return retailPeriod;
     }
 
-    public void setRetailPeriod(Date retailPeriod) {
+    public void setRetailPeriod(double retailPeriod) {
         this.retailPeriod = retailPeriod;
     }
 
@@ -156,6 +159,14 @@ public class Item {
 
     public void setItemId(int item_id) {
         this.item_id = item_id;
+    }
+
+    public double getRentailRate() {
+        return this.rentailRate;
+    }
+
+    public void setRentailRate(double rentailRate) {
+        this.rentailRate = rentailRate;
     }
 
 
@@ -207,8 +218,6 @@ public class Item {
 -------------------------------------------------------------------------------------------------------------------
                 additional methods below
 
-                //placeOnHold()
-                //returnToStock()
                 //checkOutItem()
                 //checkStatus()
                 //setRetailRate()
@@ -233,18 +242,20 @@ public class Item {
     * Increments inventoryAmount, then sets inStock to true (since there is at least one item in the inventory)
     */
     public void returnToStock() {
-        this.inventoryAmount++;
-        this.inStock = true;
-    }
-    
-   /**
-    * Checks out an item. Assumes that this method can't be called if an item isn't in stock or is already rented.
-    *
-    * @param cust: the customer checking out this item
-    */
-    public void checkOutItem(Customer cust) {
-        this.inventoryAmount--;
-        this.customerRenting = cust;
+        if(reservationList.isEmpty()) {
+            onReserve = false;
+            available = true;
+        } else {
+            if(reservationList.size() < inventoryAmount) {
+                available = true;
+            }
+            onReserve = true;
+            customerReserving = reservationList.get(0);
+        }
+        customerRenting = null;
+        inStock = true;
+        inventoryAmount++;
+        returnDate = null;
     }
         
     
@@ -267,5 +278,26 @@ public class Item {
      */
     public int getCustomerPlace(Customer cust) {
         return reservationList.indexOf(cust);
+    }
+
+    /**
+     * Sets the appropriate variables to make the item as rented
+     * @param cust - The customer that wishes to check out the item
+     */
+    public void checkOutItem(Customer cust) {
+        returnDate = new Date();
+        returnDate.setTime( returnDate.getTime() + (long)(retailPeriod));
+        inventoryAmount--;
+        customerRenting = cust;
+
+        if(inventoryAmount == 0 || inventoryAmount <= reservationList.size()) {
+            available = false;
+        } else {
+            available = true;
+        }
+
+        if(inventoryAmount == 0) {
+            inStock = false;
+        }
     }
 }

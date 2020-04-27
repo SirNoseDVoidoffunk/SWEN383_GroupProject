@@ -54,7 +54,7 @@ public class Payment {
      * suppose to be used
      * @return False - Don't use this method, use the child methods of Cash, CreditCard, and DebitCard
      */
-    public boolean approve() {
+    public boolean approve(double amountDue, double amountIssued, String currency) {
         return false;
     }
 }

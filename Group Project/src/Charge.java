@@ -8,6 +8,7 @@
  *         Samual Crouch
  */
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Charge {
@@ -73,4 +74,21 @@ public class Charge {
                     //calcDays()
                     //calcFine()
     */
+
+
+    /**
+     * To-String that returns a formated string of the charge information
+     * @return String - Formatted string of the charge info
+     */
+    @Override
+    public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String fee = "";
+        fee += "Fee Cause:              Overdue-Item\n";
+        fee += "Item:                   " + itemOverdue.getName() + "\n";
+        fee += "Scheduled Return Date:  " + format.format(issuedReturn) + "\n";
+        fee += "Actual Return Date:     " + format.format(actualReturn) + "\n";
+        fee += String.format("Fee Amount:             $%4.2f\n", amount.getAmount());
+        return fee;
+    }
 }

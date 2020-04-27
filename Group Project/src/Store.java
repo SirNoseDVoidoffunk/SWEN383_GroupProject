@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Store {
     //class attributes
+    private int id;
     private Inventory inventory;
     private String location;
     private ArrayList<Transaction> history;
@@ -19,6 +20,7 @@ public class Store {
 
     //constructors
     public Store() {
+        id = (int) (Math.random() * 10000000);
         inventory = new Inventory();
         location = "";
         history = new ArrayList<Transaction>();
@@ -26,6 +28,7 @@ public class Store {
     }
 
     public Store(Inventory inventory, String location) {
+        id = (int) (Math.random() * 10000000);
         this.inventory = inventory;
         this.location = location;
         this.history = new ArrayList<>();
@@ -65,6 +68,12 @@ public class Store {
     public void setCust_list(ArrayList<Customer> cust_list) {
         this.cust_list = cust_list;
     }
+
+    public int getStoreId() {return id;}
+
+    public void setStoreId(int id) {this.id = id;}
+
+
     /*
 -----------------------------------------------------------------------------------------------------------------------
                         additional methods below

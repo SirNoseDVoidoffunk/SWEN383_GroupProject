@@ -33,8 +33,13 @@ public class DebitCard extends Payment {
      * we are automatically returning true with the impression that in full scale development, this method will be implemented
      * @return success - True if the transaction was approve, False if not
      */
-    public boolean approve() {
-        return true;
+    @Override
+    public boolean approve(double amountDue, double amountIssued, String currency) {
+        if(amountDue <= amountIssued){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //accesors and mutators

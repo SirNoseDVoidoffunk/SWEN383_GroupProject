@@ -135,9 +135,11 @@ public class FinalProjectMain {
                     System.out.println("1. Change your account's name");
                     System.out.println("2. Reserve a Title");
                     System.out.println("3. Cancel Reservation");
-                    System.out.println("4. Something else");
-                    System.out.println("5. Something else");
-                    System.out.println("6. Something else");
+                    System.out.println("4. Something Else");
+                    System.out.println("5. Something Else");
+                    System.out.println("6. Return an Item");
+                    System.out.println("7. Rent an Item");
+                    System.out.println("8. Something else");
 
                     System.out.print("\nInput: ");
                     input = scanner.nextLine();
@@ -194,24 +196,26 @@ public class FinalProjectMain {
                     } else if (input.equals("3")) {
                         // Business Requirement 2.2
 
-                        if(cust.getReservedItems().size() != 0) {
+                        if (cust.getReservedItems().size() != 0) {
+
                             System.out.println("\nHere are the item's you current are reserving:");
-                            for(int i = 0; i < cust.getReservedItems().size(); i++) {
-                                System.out.println( i + ". " + cust.getReservedItems().get(i).getName());
+                            for (int i = 0; i < cust.getReservedItems().size(); i++) {
+                                System.out.println(i + ". " + cust.getReservedItems().get(i).getName());
                             }
                             System.out.println("\nWhich item would you like to cancel your reservation for?");
                             System.out.print("\nInput: ");
                             input = scanner.nextLine();
-                            if(Integer.parseInt(input) < cust.getReservedItems().size()) {
-                                if(cust.cancelReservation(cust.getReservedItems().get(Integer.parseInt(input)))) {
+                            if (Integer.parseInt(input) < cust.getReservedItems().size()) {
+                                if (cust.cancelReservation(cust.getReservedItems().get(Integer.parseInt(input)))) {
                                     System.out.println("\nWe have successfully removed your reservation.");
                                 } else {
                                     System.out.println("\nWe were unable to cancel your reservation at this time, please " +
-                                                       "try again later");
+                                            "try again later");
                                 }
+                            } else {
+                                System.out.println("\nYou currently don't have any items reserved!");
                             }
-                        } else {
-                            System.out.println("\nYou currently don't have any items reserved!");
+
                         }
 
                     } else if (input.equals("4")) {
@@ -219,6 +223,136 @@ public class FinalProjectMain {
                     } else if (input.equals("5")) {
 
                     } else if (input.equals("6")) {
+
+                        // Business Requirement 4.1
+
+                        if(cust.getRentedItems().isEmpty()) {
+
+                            System.out.println("\nYou don't have any items rented right now!");
+
+                        } else {
+                            System.out.println("\nHere are all of your items that you're renting, which one would you like to return?");
+                            for (int i = 0; i < cust.getRentedItems().size(); i++) {
+                                System.out.println(i + ". " + cust.getRentedItems().get(i).getName());
+                            }
+
+                            System.out.print("Input: ");
+                            input = scanner.nextLine();
+
+                            if (Integer.parseInt(input) < cust.getRentedItems().size()) {
+                                if(cust.returnItem(cust.getRentedItems().get((Integer.parseInt(input))))) {
+                                    System.out.println("\nThere was a late fee that was applied to your account because " +
+                                            "you didn't return the item before the return due date.");
+                                }
+                                System.out.println("\nYou successfully returned the item!");
+                            } else {
+                                System.out.println("\nSorry, I don't think that's the correct input. Try again later.");
+                            }
+                        }
+
+                    } else if (input.equals("7")) {
+
+                        // Business Requirement 4.2, 4.3, 4.4, 4.5 (Except 4.5.6)
+
+                        // Business Requirement 4.3
+                        boolean notPaid = true;
+                        while(notPaid) {
+                            if (cust.getAccountBalance() >= 50) {
+
+                                System.out.printf("\nBe known that you have $%4.2f worth of fees " +
+                                        "that must be paid off now before a new rental process. Would you like to continue?", cust.getAccountBalance());
+                                System.out.print("\nInput (Y/N): ");
+                                input = scanner.nextLine();
+
+                                if (input.equalsIgnoreCase("y")) {
+
+                                    System.out.println("\nWould you like to see the charges before?");
+                                    System.out.print("\nInput (Y/N): ");
+                                    input = scanner.nextLine();
+
+                                    if (input.equalsIgnoreCase("y")) {
+                                        System.out.println(cust.showInquiry());
+                                    }
+
+                                    System.out.printf("Would you like to pay off these charges of $%4.2f?\n", cust.getAccountBalance());
+                                    System.out.print("\nInput(Y/N): ");
+                                    input = scanner.nextLine();
+
+                                    if (input.equalsIgnoreCase("y")) {
+
+                                        System.out.println("\nHow would you like to pay? Cash, creditcard, or debitcard?");
+                                        System.out.print("\nInput: ");
+                                        input = scanner.nextLine();
+
+                                        if (cust.payFees(input, cust.getAccountBalance(), "USD")) {
+                                            System.out.println("\nAwesome, you paid off your fees! Now onto renting your item");
+                                            notPaid = false;
+                                        }
+                                    } else {
+                                        System.out.println("\nI'm sorry, but you have to pay your fees before renting another item. Please comply");
+                                    }
+                                } else {
+                                    System.out.println("\nI'm sorry, but you have to pay your fees before renting another item. Please comply");
+                                }
+                            } else {
+                                notPaid = false;
+                            }
+                        }
+
+                        System.out.println("\nHere are the titles you can choose from: ");
+
+                        items = store.getInventoryList();
+
+                        for(int i = 0; i < items.size(); i++) {
+                            if(items.get(i).isAvailable() || items.get(i).getCustomerPlace(cust) == 0) {
+                                System.out.println(i + ". " + items.get(i).getName());
+                            }
+                        }
+                        System.out.println("\nPlease choose your item.");
+                        System.out.print("\nInput: ");
+                        String item_selection = scanner.nextLine();
+
+                        System.out.println("How would you like to pay? Cash, creditcard, or debitcard?");
+                        System.out.print("\nInput: ");
+                        String method = scanner.nextLine();
+
+                        boolean success;
+
+                        try {
+                            // Business Requirement 4.2 - Allow customer to pay fees while renting item
+                            if(cust.getAccountBalance() > 0) {
+                                System.out.println("I see you have some fees applied to your account, would you like to view them?");
+                                System.out.print("\nInput(Y/N): ");
+                                input = scanner.nextLine();
+                                if(input.equalsIgnoreCase("y")) {
+                                    System.out.println(cust.showInquiry());
+                                }
+                                System.out.println("Would you like to pay your fees during this time?");
+                                System.out.print("\nInput(Y/N): ");
+                                input = scanner.nextLine();
+                                if(input.equalsIgnoreCase("y")) {
+                                    // Business Requirement 8/8.1
+                                    success = cust.rentItem(items.get(Integer.parseInt(item_selection)), true, method, store.getStoreId());
+                                } else {
+                                    // Business Requirement 8/8.1
+                                    success = cust.rentItem(items.get(Integer.parseInt(item_selection)), false, method, store.getStoreId());
+                                }
+                            } else {
+                                // Business Requirement 8/8.1
+                                success = cust.rentItem(items.get(Integer.parseInt(item_selection)), false, method, store.getStoreId());
+                            }
+
+                            if(success) {
+                              System.out.println("You have successfully rented the title " + items.get(Integer.parseInt(item_selection)).getName() + "!");
+                            } else {
+                                System.out.println("\nI'm sorry, we couldn't rent you the item at this time, please try again later");
+                            }
+
+                        } catch(Exception e) {
+                            System.out.println("That wasn't a valid input, please try again\n");
+                        }
+
+                    } else if (input.equals("8")) {
 
                     }
                 }

@@ -27,8 +27,8 @@ public class Cash extends Payment {
      * @return
      */
     @Override
-    public boolean approve() {
-        if(this.getAmount() > this.amountDue) {
+    public boolean approve(double amountDue, double amountIssued, String currency) {
+        if(amountDue <= amountIssued) {
             return true;
         } else {
             return false;
