@@ -1,13 +1,14 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Manager class that's used to represent a manager and declare manager-specific methods
- * @version 4/25/20
+ * @version 4/26/20
  * @author Blake Wesel
  *         Hansel Leal
  *         Bryce Jones
  *         Regina Bass
- *         Samual Crouch
+ *         Samuel Crouch
  */
 
 public class Manager extends Employee {
@@ -50,13 +51,82 @@ public class Manager extends Employee {
             cust_list.remove(cust);
             return true;
         }
-
     }
+
+    /**
+     * Sets an item's retail period
+     * @param name - The name of the item to be updated
+     * @param period - The new retail period
+     * @return success - True if the retail period was successfully updated
+     */
+    public boolean setRentalPeriod(String name, double period) {
+        for(Item item : this.store.getInventoryList()) {
+            if(item.getName().toLowerCase().equals(name.toLowerCase())) {
+                item.setRetailPeriod(period);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Sets an item's retail rate
+     * @param name - The name of the item to be updated
+     * @param rate - The new retail rate
+     * @return success - True if the retail period was successfully updated
+     */
+    public boolean setRetailRate(String name, double rate) {
+        for(Item item : this.store.getInventoryList()) {
+            if(item.getName().toLowerCase().equals(name.toLowerCase())) {
+                item.setRentalRate(rate);
+                return true;
+            }
+        }
+        return false;
+    }
+
     //addItem()
     //removeItem()
-    //setRentalRate()
     //getCustomerReport()
     //removeLateCharge()
-    //createInventoryReport()
+
+    /**
+     * Creates an inventory report
+     * @return String - The name of the generated CSV file
+     */
+    public String createInventoryReport() {
+        InventoryReport inventoryReport = new InventoryReport();
+        for(Item item : this.store.getInventoryList()) { inventoryReport.addItem(item); }
+        return inventoryReport.getReport();
+    }
+
+    /**
+     * Creates a customer report
+     * @param type - The specific report type to be created
+     * @return String - The name of the generated text file
+     */
+    public String createCustomerReport(String type) {
+        CustomerReport customerReport = new CustomerReport();
+        for(Customer cust : this.store.getCustomerList()) {
+            if(type.equals("all")) {
+                customerReport.addCustomer(cust);
+            } else if(type.equals("overdue")) {
+                boolean addcust = false;
+                for(Item item : cust.getRentedItems()) {
+                    if(item.getReturnDate().before(new Date())) {
+                        addcust = true;
+                    }
+                }
+                if(addcust) {
+                    customerReport.addCustomer(cust);
+                }
+            } else if(type.equals("fines")) {
+                if(cust.getFinesOwed().size()>0) {
+                    customerReport.addCustomer(cust);
+                }
+            }
+        }
+        return customerReport.getReport();
+    }
 
 }

@@ -1,4 +1,6 @@
-import java.awt.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -11,7 +13,7 @@ import java.util.Iterator;
  *         Hansel Leal
  *         Bryce Jones
  *         Regina Bass
- *         Samual Crouch
+ *         Samuel Crouch
  */
 public class FinalProjectMain {
 
@@ -110,6 +112,8 @@ public class FinalProjectMain {
             int id = (int) (Math.random() * 10000000); // user_id
             cust = new Customer(id, "name", "addy", "978", "978", "email", "info", "pass");
             manager = new Manager(store, inventory, id, "name", "addy", "978", "978", "email", "info", "pass");
+
+            store.addCustomerToList(cust);
         }
 
         boolean doneUsingCustomer = false;
@@ -394,10 +398,10 @@ public class FinalProjectMain {
 
                     System.out.println("\nHere are your menu actions:\n");
                     System.out.println("0. Exit to main menu");
-                    System.out.println("1. Something Else");
-                    System.out.println("2. Something else");
-                    System.out.println("3. Something else");
-                    System.out.println("4. Something else");
+                    System.out.println("1. Create Customer Report");
+                    System.out.println("2. Create Inventory Report");
+                    System.out.println("3. Set Retail Period");
+                    System.out.println("4. Set Retail Rate");
                     System.out.println("5. Add Item(s)");
                     System.out.println("6. Delete Item");
 
@@ -410,19 +414,81 @@ public class FinalProjectMain {
 
                     } else if (input.equals("1")) {
 
-                        // action code goes here
+                        // Business Requirement 10
+                        System.out.println("\nChoose a report type:\n");
+                        System.out.println("1. All customers");
+                        System.out.println("2. Customers with overdue items");
+                        System.out.println("3. Customers with fines");
+
+                        System.out.print("\nInput: ");
+                        input = scanner.nextLine();
+
+                        String file_name = "";
+                        if (input.equals("1")) {
+                            file_name = manager.createCustomerReport("all");
+                        } else if (input.equals("2")) {
+                            file_name = manager.createCustomerReport("overdue");
+                        } else if (input.equals("3")) {
+                            file_name = manager.createCustomerReport("fines");
+                        }
+
+                        if(!file_name.equals("")) {
+                            System.out.println("\nCustomer report ("+file_name+") created");
+                        } else {
+                            System.out.println("\nThe customer report could not be created, try again");
+                        }
 
                     } else if (input.equals("2")) {
 
-                        // action code goes here
+                        // Business Requirement 11
+                        String file_name = manager.createInventoryReport();
+                        if(!file_name.equals("")) {
+                            System.out.println("\nInventory report ("+file_name+") created");
+                        } else {
+                            System.out.println("\nThe inventory report could not be created, try again");
+                        }
 
                     } else if (input.equals("3")) {
 
-                        // action code goes here
+                        // Business Requirement 7.1
+
+                        System.out.println("\nEnter a title to update the retail period of");
+                        System.out.print("\nInput: ");
+                        String title_name = scanner.nextLine();
+                        // If needed, update format to expected format!!!
+                        System.out.println("\nEnter a retail period in terms of milliseconds: ");
+                        System.out.print("\nInput: ");
+                        String periodString = scanner.nextLine();
+                        try {
+                            if(manager.setRentalPeriod(title_name, Double.parseDouble(periodString))) {
+                                System.out.println("\nThe retail period of "+title_name+" was successfully updated to "+periodString + " milliseconds!");
+                            } else {
+                                System.out.println("\nThe retail period could not be updated. Check the input title");
+                            }
+                        } catch (Exception e) {
+                            System.out.println("\nThe retail period was not formatted correctly, try again");
+                        }
 
                     } else if (input.equals("4")) {
 
-                        // action code goes here
+                        // Business Requirement 7.2
+
+                        System.out.println("\nEnter a title to update the retail rate of");
+                        System.out.print("\nInput: ");
+                        String title_name = scanner.nextLine();
+                        System.out.println("\nEnter a retail rate");
+                        System.out.print("\nInput: ");
+                        String rateString = scanner.nextLine();
+                        try {
+                            double retail_rate = Double.parseDouble(rateString);
+                            if (manager.setRetailRate(title_name, retail_rate)) {
+                                System.out.println("\nThe retail rate of " + title_name + " was successfully updated to " + retail_rate);
+                            } else {
+                                System.out.println("\nThe retail rate could not be updated. Check the input title");
+                            }
+                        } catch (NumberFormatException e){
+                            System.out.println("\nThe retail rate was not formatted correctly, try again");
+                        }
 
                     } else if (input.equals("5")) {
 

@@ -1,11 +1,11 @@
 /**
  * Item class that's used as the parent class of DVD and CD and to declare shared methods for both of those classes
- * @version 4/25/20
+ * @version 4/26/20
  * @author Blake Wesel
  *         Hansel Leal
  *         Bryce Jones
  *         Regina Bass
- *         Samual Crouch
+ *         Samuel Crouch
  */
 
 import java.text.SimpleDateFormat;
@@ -23,7 +23,7 @@ public class Item {
     private ArrayList<Customer> reservationList;
     private double retailPeriod = 5000; // hard coded for demonstration purposes
     private Date returnDate;
-    private double rentailRate;
+    private double rentalRate;
     private String name;
     private String type;
     private int item_id;
@@ -41,7 +41,7 @@ public class Item {
         name = "";
         type = "";
         item_id = -1;
-        rentailRate = 19.95;
+        rentalRate = 19.95;
     }
 
     public Item(boolean available, boolean onReserve, boolean inStock, int inventoryAmount, String name, String type) {
@@ -53,7 +53,7 @@ public class Item {
         this.name = name;
         this.type = type;
 
-        this.rentailRate = 19.95; // hard coded
+        this.rentalRate = 19.95; // hard coded
 
         // attribute set during rental period
         this.customerReserving = null;
@@ -130,6 +130,10 @@ public class Item {
         this.retailPeriod = retailPeriod;
     }
 
+    public double getRentalRate() { return rentalRate; }
+
+    public void setRentalRate(double rentalRate) { this.rentalRate = rentalRate; }
+
     public Date getReturnDate() {
         return returnDate;
     }
@@ -162,15 +166,6 @@ public class Item {
         this.item_id = item_id;
     }
 
-    public double getRentailRate() {
-        return this.rentailRate;
-    }
-
-    public void setRentailRate(double rentailRate) {
-        this.rentailRate = rentailRate;
-    }
-
-
 
     /**
      * Updates the necessary values in order to place an item on reserve
@@ -187,7 +182,7 @@ public class Item {
 
             available = false;
             return true;
-        // if the item is not available (not in stock) or it's reserved then add to reservation list
+            // if the item is not available (not in stock) or it's reserved then add to reservation list
         } else if(!available || onReserve) {
             this.reservationList.add(cust);
             return true;
@@ -231,19 +226,6 @@ public class Item {
         inventoryAmount++;
         returnDate = null;
     }
-        
-    
-    public String checkStatus() {
-        if (this.available) {
-            return "Available";
-        } else if (this.onReserve) {
-            return "reserved";
-        } else if (!(this.inStock)) {
-            return "Not in Stock";
-        } else {
-            return "";
-        }
-    }
 
     /**
      * Returns the position of where the customer is on the reservation list
@@ -259,7 +241,12 @@ public class Item {
      * @param cust - The customer that wishes to check out the item
      */
     public void checkOutItem(Customer cust) {
-
+        if(reservationList.indexOf(cust) != -1) {
+            reservationList.remove(cust);
+            if(reservationList.size() > 0) {
+                customerReserving = reservationList.get(0);
+            }
+        }
         returnDate = new Date();
         returnDate.setTime( returnDate.getTime() + (long)(retailPeriod));
         inventoryAmount--;

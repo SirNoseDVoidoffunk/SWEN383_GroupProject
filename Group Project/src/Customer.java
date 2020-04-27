@@ -175,8 +175,8 @@ public class Customer extends Person {
      */
     public void addLateCharge(Item late_item) {
         // create a new charge object and add it to the customer class
-        finesOwed.add(new Charge(new Payment(STANDARD_LATE_FEE_PERCENT * late_item.getRentailRate(), "USD"), late_item.getReturnDate(), new Date(), late_item));
-        accountBalance += STANDARD_LATE_FEE_PERCENT * late_item.getRentailRate();
+        finesOwed.add(new Charge(new Payment(STANDARD_LATE_FEE_PERCENT * late_item.getRentalRate(), "USD"), late_item.getReturnDate(), new Date(), late_item));
+        accountBalance += STANDARD_LATE_FEE_PERCENT * late_item.getRentalRate();
     }
 
     /**
@@ -187,9 +187,9 @@ public class Customer extends Person {
         boolean payment_successful = false;
         double amount = 0;
         if(includeFees) {
-            amount = item.getRentailRate() + accountBalance;
+            amount = item.getRentalRate() + accountBalance;
         } else {
-            amount = item.getRentailRate();
+            amount = item.getRentalRate();
         }
 
         if(method.equals("cash")) {
