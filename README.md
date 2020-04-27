@@ -1,6 +1,6 @@
 # SWEN 383 Group Project - Movie Retal Program
 ### Machine Code Migos:
-<a href="https://github.com/Balake-weasel">Blake Wesel</a>, <a href="https://github.com/SirNoseDVoidoffunk">Hansel Leal</a>, Bryce Jones, <a href="https://github.com/SamC00">Samuel Crouch</a>, <a href="https://github.com/regina-bass">Regina Bass</a>
+<a href="https://github.com/Balake-weasel">Blake Wesel</a>, <a href="https://github.com/SirNoseDVoidoffunk">Hansel Leal</a>, <a href="https://github.com/bcj3525">Bryce Jones</a>, <a href="https://github.com/SamC00">Sam Crouch</a>, <a href="https://github.com/regina-bass">Regina Bass</a>
 
 
 ## Domain Model
