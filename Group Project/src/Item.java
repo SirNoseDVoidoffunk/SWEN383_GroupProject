@@ -285,6 +285,7 @@ public class Item {
      * @param cust - The customer that wishes to check out the item
      */
     public void checkOutItem(Customer cust) {
+        checkOutOfInventory();
         returnDate = new Date();
         returnDate.setTime( returnDate.getTime() + (long)(retailPeriod));
         inventoryAmount--;
@@ -298,6 +299,17 @@ public class Item {
 
         if(inventoryAmount == 0) {
             inStock = false;
+        }
+    }
+
+    /**
+     * Checks to see if the item stock is 1 and if so, transmits that there is only one left in inventory to regional
+     * control computer
+     */
+    public void checkOutOfInventory() {
+        if(inventoryAmount == 1) {
+            // call to the regional control computer with store_id, item_id, and quantity
+            System.out.println("Transmitted Out of Inventory");
         }
     }
 }
