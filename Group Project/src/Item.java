@@ -8,6 +8,7 @@
  *         Samual Crouch
  */
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -311,5 +312,25 @@ public class Item {
             // call to the regional control computer with store_id, item_id, and quantity
             System.out.println("Transmitted Out of Inventory");
         }
+    }
+
+    /**
+     * A formatted string that returns information about the specific item
+     * @return String - A formatted string that returns the information about an item
+     */
+    public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String info = "";
+        info += "Title: " + this.name + "\n";
+        if(available) {
+            info += "Status: Available";
+        } else if(onReserve) {
+            info += "Status: On Reserve\nCustomer: " + reservationList.get(0).getName();
+        } else if(!inStock) {
+            info += "Status: Rented\nCustomer: " + customerRenting.getName() +
+                    "\nDue Date: " + format.format(returnDate);
+        }
+        return info;
     }
 }

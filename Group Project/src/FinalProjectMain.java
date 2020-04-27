@@ -136,7 +136,7 @@ public class FinalProjectMain {
                     System.out.println("1. Change your account's name");
                     System.out.println("2. Reserve a Title");
                     System.out.println("3. Cancel Reservation");
-                    System.out.println("4. Something Else");
+                    System.out.println("4. See the Status of an Item");
                     System.out.println("5. Something Else");
                     System.out.println("6. Return an Item");
                     System.out.println("7. Rent an Item");
@@ -221,18 +221,32 @@ public class FinalProjectMain {
 
                     } else if (input.equals("4")) {
 
+                        System.out.println("Here are the items we have in the store, please choose one to get information on it:");
+
+                        items = store.getInventoryList();
+                        for(int i = 0; i < items.size(); i++) {
+                            System.out.println(i + ". " + items.get(i).getName());
+                        }
+
+                        System.out.print("\nInput: ");
+                        input = scanner.nextLine();
+
+                        System.out.println(items.get(Integer.parseInt(input)));
+
                     } else if (input.equals("5")) {
 
                     } else if (input.equals("6")) {
 
-                        // Business Requirement 4.1
+                        // Business Requirement 4.1 and 3.2
 
                         if(cust.getRentedItems().isEmpty()) {
 
                             System.out.println("\nYou don't have any items rented right now!");
 
                         } else {
-                            System.out.println("\nHere are all of your items that you're renting, which one would you like to return?");
+
+                            System.out.println("\nHow many items would you like to return?");
+                            System.out.println("\nHere are all of your items that you're renting: ");
                             for (int i = 0; i < cust.getRentedItems().size(); i++) {
                                 System.out.println(i + ". " + cust.getRentedItems().get(i).getName());
                             }
@@ -240,20 +254,33 @@ public class FinalProjectMain {
                             System.out.print("Input: ");
                             input = scanner.nextLine();
 
-                            if (Integer.parseInt(input) < cust.getRentedItems().size()) {
-                                if(cust.returnItem(cust.getRentedItems().get((Integer.parseInt(input))))) {
-                                    System.out.println("\nThere was a late fee that was applied to your account because " +
-                                            "you didn't return the item before the return due date.");
+                            try {
+                                int num = Integer.parseInt(input);
+                                System.out.println("Please input the numbers that correspond with the items you wish to return, one at a time: ");
+                                for(int i = 0; i < num; i++){
+                                    System.out.print("\nInput: ");
+                                    input = scanner.nextLine();
+
+                                    if (Integer.parseInt(input) < cust.getRentedItems().size()) {
+                                        if(cust.returnItem(cust.getRentedItems().get((Integer.parseInt(input))))) {
+                                            System.out.println("\nThere was a late fee that was applied to your account because " +
+                                                    "you didn't return the item before the return due date.");
+                                        }
+                                        System.out.println("\nYou successfully returned that item!");
+                                    } else {
+                                        System.out.println("\nSorry, I don't think that's the correct input. Try again.");
+                                        i--;
+                                    }
                                 }
-                                System.out.println("\nYou successfully returned the item!");
-                            } else {
-                                System.out.println("\nSorry, I don't think that's the correct input. Try again later.");
+
+                            } catch(Exception e){
+                                System.out.println("That's not a number I can process, sorry.");
                             }
                         }
 
                     } else if (input.equals("7")) {
 
-                        // Business Requirement 4.2, 4.3, 4.4, 4.5 (Except 4.5.6)
+                        // Business Requirement 3.1, 4.2, 4.3, 4.4, 4.5 (Except 4.5.6)
 
                         // Business Requirement 4.3
                         boolean notPaid = true;
