@@ -2,6 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.Iterator;
 
 /**
  * Main class that's used to run the program
@@ -236,8 +237,8 @@ public class FinalProjectMain {
                     System.out.println("2. Something else");
                     System.out.println("3. Something else");
                     System.out.println("4. Something else");
-                    System.out.println("5. Something else");
-                    System.out.println("6. Something else");
+                    System.out.println("5. Add Item(s)");
+                    System.out.println("6. Delete Item");
 
                     System.out.print("\nInput: ");
                     input = scanner.nextLine();
@@ -264,11 +265,75 @@ public class FinalProjectMain {
 
                     } else if (input.equals("5")) {
 
-                        // action code goes here
+                        // Business Requirement 5.1 and 6.1
+                        // Manager can add item(s)
+                        boolean cont = true;
+                        
+                        while(cont){
+                           System.out.println("\nEnter Information below.");
+                           System.out.print("\nTitle: ");
+                           String title = scanner.nextLine();
+                           System.out.print("\nInventory Amount: ");
+                           int inventoryAmount = scanner.nextInt();
+                           scanner.nextLine();    // Fix cursor
+                           System.out.print("\nType: ");
+                           String type = scanner.nextLine();
+                           type = type.toUpperCase();
+                           System.out.println("You have entered a " + type + ": " + title);
+                           System.out.println("There are " + inventoryAmount + " in stock.");
+                           Item item = new Item(true, false, true, inventoryAmount, title, type);
+                           items.add(item);
+                           
+                           System.out.println("\nHere is the complete list of titles in your inventory:\n");
+                           System.out.format("%-25s%25s%10s", "Title", "Inventory Amount", "Type\n");
+                           System.out.println("--------------------------------------------------------------");
+                            for(Item num:items){
+                               //this call may vary depending on the book implementation
+                               System.out.format("%-30s%12d%18s", num.getName(), num.getInventoryAmount(), num.getType() + "\n");
+                            }
+                           
+                           System.out.print("\nWould you like to add another selection? (y/n) ");
+                           String ans = scanner.nextLine();
+                           ans = ans.toUpperCase();
+                           if(ans.equals("Y") || ans.equals("YES")){
+                              // Debug: System.out.println("You answered yes");
+                              cont = true;  
+                           }
+                           else{
+                              //Debug: System.out.println("You answered something other than yes");
+                              cont = false;
+                           }
+                        }
 
                     } else if (input.equals("6")) {
 
-                        // action code goes here
+                        //Business Requirement 5.2 and 6.2
+                        String selection ="";
+                        
+                        System.out.println("Enter the name of item:");
+                        selection = scanner.nextLine();
+                        
+                        /*for(int i=0; i < items.size(); i++){
+                           if(i.equals(selection))
+                        
+                        }*/
+                        
+                        Iterator<Item> itr = items.iterator(); 
+                        while(itr.hasNext()){
+                           Item nxt = itr.next();
+                           
+                           try{
+                              if(nxt.getName().equals(selection)){
+                                 items.remove(nxt);
+                                 System.out.println("Success!");
+                                 break;
+                              }
+                           }
+                           catch(Exception e){
+                              System.out.println("No item by that title");
+                           }
+                        }
+                        
 
                     }
                 }
