@@ -286,10 +286,11 @@ public class Item {
      * @param cust - The customer that wishes to check out the item
      */
     public void checkOutItem(Customer cust) {
-        checkOutOfInventory();
+
         returnDate = new Date();
         returnDate.setTime( returnDate.getTime() + (long)(retailPeriod));
         inventoryAmount--;
+        checkOutOfInventory();
         customerRenting = cust;
 
         if(inventoryAmount == 0 || inventoryAmount <= reservationList.size()) {
@@ -324,7 +325,7 @@ public class Item {
         String info = "";
         info += "Title: " + this.name + "\n";
         if(available) {
-            info += "Status: Available";
+            info += "Status: Available with " + inventoryAmount + " in stock";
         } else if(onReserve) {
             info += "Status: On Reserve\nCustomer: " + reservationList.get(0).getName();
         } else if(!inStock) {

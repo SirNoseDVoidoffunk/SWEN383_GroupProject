@@ -231,7 +231,7 @@ public class FinalProjectMain {
                         System.out.print("\nInput: ");
                         input = scanner.nextLine();
 
-                        System.out.println(items.get(Integer.parseInt(input)));
+                        System.out.println("\n" + items.get(Integer.parseInt(input)));
 
                     } else if (input.equals("5")) {
 
